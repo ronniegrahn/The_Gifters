@@ -1,0 +1,5 @@
+﻿
+ParticipationAmount = mängden pengar som personen deltar med 
+Contribution = pengar som faktiskt ges till en organization (avkastningen)
+Donation = en gift som är non-refundable
+Seed = en gift som är refundable
