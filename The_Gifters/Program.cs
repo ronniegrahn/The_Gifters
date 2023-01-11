@@ -23,10 +23,6 @@ builder.Services.ConfigureApplicationCookie(o => o.LoginPath = "/users/login");
 
 var app = builder.Build();
 
-app.UseRouting();
-app.UseEndpoints(o => o.MapControllers());
-
-
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthentication(); // Identifiering
