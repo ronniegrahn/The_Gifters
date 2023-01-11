@@ -1,0 +1,46 @@
+﻿@using The_Gifters.Views.Users;
+@model CreateVM
+@{
+	ViewBag.Title = "Create";
+}
+
+<a asp-controller="Users" asp-action="Index">Go back</a>
+<a asp-controller="Users" asp-action="Login">
+	<input type="button" value="Login" />
+</a>
+
+@Html.Partial("_Logo")
+
+<form asp-controller="user" asp-action="login">
+	<label asp-for="FirstName"></label>
+	<input asp-for="FirstName" />
+	<span asp-validation-for="FirstName"></span>
+
+	<label asp-for="LastName"></label>
+	<input asp-for="LastName" />
+	<span asp-validation-for="LastName"></span>
+
+	<label asp-for="Email"></label>
+	<input asp-for="Email" />
+	<span asp-validation-for="Email"></span>
+
+	<label asp-for="PhoneNumber"></label>
+	<input asp-for="PhoneNumber"/>
+	<span asp-validation-for="PhoneNumber"></span>
+
+	<label asp-for="Password"></label>
+	<input asp-for="Password" />
+	<span asp-validation-for="Password"></span>
+
+	<label asp-for="PasswordRepeat"></label>
+	<input asp-for="PasswordRepeat" />
+	<span asp-validation-for="PasswordRepeat"></span>
+
+	<p>
+		<input type="checkbox" asp-for="AcceptTerms" />
+		<span asp-validation-for="AcceptTerms"></span>
+		I Accept terms and agreements
+	</p>
+	<input type="submit" value="Create account" />
+</form>
+<div asp-validation-summary=All></div>

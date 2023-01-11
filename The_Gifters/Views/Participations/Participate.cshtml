@@ -1,0 +1,27 @@
+﻿@using The_Gifters.Views.Contributions;
+@model ParticipateVM
+@{
+	ViewData["Title"] = "Participate";
+}
+@Html.Partial("_LoggedInMenu")
+@Html.Partial("_Logo")
+
+<h3>New participation</h3>
+
+<form asp-controller="Participations" asp-action="">
+	<label asp-for="Amount"></label>
+	<input asp-for="Amount" />
+	<span asp-validation-for="Amount"></span>
+
+@*	<select id="drpEmpList" class="form-control" asp-for="OrganizationNames" asp-items="@(new SelectList(Model.OrganizationNames,  "Text"))">
+		<option value="">--Select--</option>
+	</select>*@
+
+
+	<br />
+	<input type="submit" value="Refundable (12 months)" />
+	<input type="submit" value="Donate (no refund)" />
+	<p>x SEK will generate approximately Y SEK in contributions per year.</p>
+	<p>x SEK will generate approximately Y SEK in contributions per year.</p>
+</form>
+<div asp-validation-summary=All></div>
