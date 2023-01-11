@@ -10,8 +10,6 @@ builder.Services.AddDbContext<GiftersContext>(o => o.UseSqlServer(connString));
 
 var app = builder.Build();
 
-
-
 app.UseRouting();
 app.UseEndpoints(o => o.MapControllers());
 
