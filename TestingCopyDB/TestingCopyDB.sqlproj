@@ -3,16 +3,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>GiftersDb</Name>
+    <Name>TestingCopyDB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{2faaf1ce-b480-46cd-9d79-6ac656d4b0aa}</ProjectGuid>
+    <ProjectGuid>{5bdd4e0a-4a0a-4f8c-beb2-3da89daf90a2}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>GiftersDb</RootNamespace>
-    <AssemblyName>GiftersDb</AssemblyName>
+    <RootNamespace>TestingCopyDB</RootNamespace>
+    <AssemblyName>TestingCopyDB</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -56,20 +56,5 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-  </ItemGroup>
-  <ItemGroup>
-    <Build Include="Customers.sql" />
-    <Build Include="Contributions.sql" />
-    <Build Include="Organizations.sql" />
-    <Build Include="AspNetRoleClaims.sql" />
-    <Build Include="AspNetRoles.sql" />
-    <Build Include="AspNetUserClaims.sql" />
-    <Build Include="AspNetUserLogins.sql" />
-    <Build Include="AspNetUserRoles.sql" />
-    <Build Include="AspNetUsers.sql" />
-    <Build Include="AspNetUserTokens.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="GiftersDb.refactorlog" />
   </ItemGroup>
 </Project>
