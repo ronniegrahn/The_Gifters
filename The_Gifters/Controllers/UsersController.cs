@@ -9,5 +9,17 @@ namespace The_Gifters.Controllers
 		{
 			return View();
 		}
+
+		[HttpGet("users/login")]
+		public IActionResult Login()
+		{
+			return View();
+		}
+
+		[HttpGet("users/create")]
+		public IActionResult Create()
+		{
+			return View();
+		}
 	}
 }

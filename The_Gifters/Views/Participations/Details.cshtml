@@ -1,0 +1,11 @@
+﻿@using The_Gifters.Views.Contributions;
+@model DetailsVM
+@{
+	ViewData["Title"] = "Details";
+}
+
+@Html.Partial("_LoggedInMenu")
+@Html.Partial("_Logo")
+
+<input type="submit" value="Convert to donation" />
+<input type="submit" value="Refund" />

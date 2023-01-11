@@ -1,0 +1,23 @@
+﻿@{
+	ViewData["Title"] = "Index";
+}
+<a asp-controller="Users" asp-action="Login">
+	<input type="button" value="Login" />
+</a>
+<a asp-controller="Users" asp-action="Create">
+	<input type="button" value="Create user" />
+</a>
+@Html.Partial("_Logo")
+<h3>Giving like it should be.</h3>
+<p>
+	Make a contribution and watch it yield donations as long as your contribution remains.
+	You can give for life or have the money returned to you after a specified time.
+</p>
+
+<p>You choose how much</p>
+<p>You choose for how long</p>
+<p>This is sustainable giving</p>
+<p>
+	<a asp-controller="Users" asp-action="Create">I want to participate</a>
+	<a asp-controller="Users" asp-action="Login">I'm already a participant</a>
+</p>

@@ -1,0 +1,25 @@
+﻿@using The_Gifters.Views.Users;
+@model LoginVM
+@{
+	ViewBag.Title = "Login";
+}
+
+<a asp-controller="Users" asp-action="Index">Go back</a>
+<a asp-controller="Users" asp-action="Create">
+	<input type="button" value="Create user" />
+</a>
+
+@Html.Partial("_Logo")
+
+<form asp-controller="user" asp-action="login">
+	<label asp-for="Email"></label>
+	<input asp-for="Email" />
+	<span asp-validation-for="Email"></span>
+
+	<label asp-for="Password"></label>
+	<input asp-for="Password" />
+	<span asp-validation-for="Password"></span>
+	<br />
+	<input type="submit" value="Create" />
+</form>
+<div asp-validation-summary=All></div>
