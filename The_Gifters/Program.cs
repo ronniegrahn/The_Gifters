@@ -13,7 +13,6 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<UsersService>();
 
-var connString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<GiftersContext>(o => o.UseSqlServer(connString));
 builder.Services.AddDbContext<IdentityDbContext>(o => o.UseSqlServer(connString));
 
