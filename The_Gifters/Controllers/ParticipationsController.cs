@@ -6,60 +6,66 @@ using The_Gifters.Views.Contributions;
 
 namespace The_Gifters.Controllers
 {
-	public class ParticipationsController : Controller
-	{
-		private readonly ParticipatesService participatesService;
+    public class ParticipationsController : Controller
+    {
+        private readonly ParticipatesService participatesService;
 
-		public ParticipationsController(ParticipatesService participatesService)
-		{
-			this.participatesService = participatesService;
-		}
+        public ParticipationsController(ParticipatesService participatesService)
+        {
+            this.participatesService = participatesService;
+        }
 
-	  //[Authorize]
-		[HttpGet("participations/participate")]
-		public async Task<IActionResult> ParticipateAsync()
-		{
-			var organizationNames = await participatesService.GetOrganizationNamesAsync();
+#if !DEBUG
+[Authorize]
+#endif
+        [HttpGet("participations/participate")]
+        public async Task<IActionResult> ParticipateAsync()
+        {
+            var organizationNames = await participatesService.GetOrganizationNamesAsync();
 
-			ParticipateVM model = new ParticipateVM()
-			{
-				OrganizationNames = organizationNames,
-			};
+            ParticipateVM model = new ParticipateVM()
+            {
+                OrganizationNames = organizationNames,
+            };
 
-			return View(model);
-		}
+            return View(model);
+        }
 
-		//[Authorize]
-    [HttpGet("participations/myparticipations")]
-		public IActionResult MyParticipations()
-		{
-			return View();
-		}
+#if !DEBUG
+[Authorize]
+#endif
+        [HttpGet("participations/myparticipations")]
+        public IActionResult MyParticipations()
+        {
+            return View();
+        }
 
-    //[Authorize]
-    [HttpGet("participations/details")]
-		public IActionResult Details()
-		{
-			return View();
-		}
+#if !DEBUG
+[Authorize]
+#endif
+        [HttpGet("participations/details")]
+        public IActionResult Details()
+        {
+            return View();
+        }
 
-		[HttpPost("participations/participate")]
-		public IActionResult CreateParticipation(ParticipateVM participateVM)
-		{
-			if (!ModelState.IsValid)
-			{
-				return View();
-			}
+        [HttpPost("participations/participate")]
+        public IActionResult CreateParticipation(ParticipateVM participateVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
 
-			var buttonName = Request.Form["Refundable"].Count > 0 ? "Refundable" : "Donate";
+            var buttonName = Request.Form["Refundable"].Count > 0 ? "Refundable" : "Donate";
 
-			if (buttonName == "Refundable")
-				participateVM.IsRefundable = true;
-			else
-				participateVM.IsRefundable = false;
+            if (buttonName == "Refundable")
+                participateVM.IsRefundable = true;
+            else
+                participateVM.IsRefundable = false;
 
-			participatesService.AddParticipation(participateVM);
-			return RedirectToAction(nameof(MyParticipations));
-		}
-	}
+            participatesService.AddParticipation(participateVM);
+            return RedirectToAction(nameof(MyParticipations));
+        }
+    }
 }
