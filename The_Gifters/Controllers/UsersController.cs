@@ -43,8 +43,7 @@ namespace The_Gifters.Controllers
             }
 
             // Redirect user when succcessfully logged in.
-            return Content("You have logged in!");
-            //return RedirectToAction(nameof(ParticipationsController.MyParticipations));
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet("users/create")]
