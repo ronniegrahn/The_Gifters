@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using The_Gifters.Models;
+using The_Gifters.Views.Contributions;
 using The_Gifters.Views.Users;
 
 namespace The_Gifters.Controllers
@@ -23,6 +24,27 @@ namespace The_Gifters.Controllers
         public IActionResult Login()
         {
             return View();
+        }
+
+        [HttpPost("users/login")]
+        public async Task<IActionResult> LoginAsync(LoginVM viewModel)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            // Check if credentials is valid (and set auth cookie)
+            var success = await usersService.TryLoginAsync(viewModel);
+            if (!success)
+            {
+                // Show error
+                ModelState.AddModelError(string.Empty, "Login failed");
+                return View();
+            }
+
+            // Redirect user
+            //return RedirectToAction(nameof(Members));
+            return Content("You have logged in!");
+            //return RedirectToAction(nameof(ParticipationsController.MyParticipations));
         }
 
         [HttpGet("users/create")]

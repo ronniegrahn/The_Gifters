@@ -12,14 +12,18 @@
 @Html.Partial("_Logo")
 
 <form asp-controller="user" asp-action="login">
-	<label asp-for="Email"></label>
+	@*<label asp-for="Email"></label>
 	<input asp-for="Email" />
-	<span asp-validation-for="Email"></span>
+	<span asp-validation-for="Email"></span>*@
+
+	<label asp-for="Username"></label>
+	<input asp-for="Username" />
+	<span asp-validation-for="Username"></span>
 
 	<label asp-for="Password"></label>
 	<input asp-for="Password" />
 	<span asp-validation-for="Password"></span>
 	<br />
-	<input type="submit" value="Create" />
+	<input type="submit" value="Login" />
 </form>
 <div asp-validation-summary=All></div>

@@ -36,7 +36,7 @@ namespace The_Gifters.Models
             else
                 return createResult.Errors.First().Description;
         }
-        
+
         //public async Task<string> TryRegisterAsync(CreateVM viewModel)
         //{
         //    // Todo: Try to create a new user
@@ -56,5 +56,19 @@ namespace The_Gifters.Models
         //    else
         //        return createResult.Errors.First().Description;
         //}
+
+        public async Task<bool> TryLoginAsync(LoginVM viewModel)
+        {
+            // Todo: Try to sign user
+            SignInResult signInResult = await signInManager.PasswordSignInAsync(
+                viewModel.Username,
+                viewModel.Password,
+                isPersistent: false,
+                lockoutOnFailure: false);
+
+            bool signInSucceeded = signInResult.Succeeded;
+
+            return signInSucceeded;
+        }
     }
 }
