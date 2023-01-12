@@ -13,6 +13,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<UsersService>();
 builder.Services.AddTransient<ParticipatesService>();
+
 builder.Services.AddDbContext<GiftersContext>(o => o.UseSqlServer(connString));
 builder.Services.AddDbContext<IdentityDbContext>(o => o.UseSqlServer(connString));
 

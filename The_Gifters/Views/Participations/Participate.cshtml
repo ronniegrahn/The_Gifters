@@ -8,19 +8,21 @@
 
 <h3>New participation</h3>
 
-<form asp-controller="Participations" asp-action="">
+<form asp-controller="Participations" asp-action="CreateParticipation">
 	<label asp-for="Amount"></label>
 	<input asp-for="Amount" />
 	<span asp-validation-for="Amount"></span>
 
-@*	<select id="drpEmpList" class="form-control" asp-for="OrganizationNames" asp-items="@(new SelectList(Model.OrganizationNames,  "Text"))">
+	<label asp-for="OrganizationNames"></label>
+	<select id="drpEmpList" class="form-control" asp-for="OrganizationNames" asp-items="@(new SelectList(Model.OrganizationNames,  "Text"))">
 		<option value="">--Select--</option>
-	</select>*@
+	</select>
+	<span asp-validation-for="OrganizationNames"></span>
 
 
 	<br />
-	<input type="submit" value="Refundable (12 months)" />
-	<input type="submit" value="Donate (no refund)" />
+	<input type="submit" name="refundable" value="Refundable (12 months)"/>
+	<input type="submit" name="donation" value="Donate (no refund)"/>
 	<p>x SEK will generate approximately Y SEK in contributions per year.</p>
 	<p>x SEK will generate approximately Y SEK in contributions per year.</p>
 </form>
