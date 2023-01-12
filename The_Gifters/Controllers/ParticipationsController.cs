@@ -5,21 +5,21 @@ namespace The_Gifters.Controllers
 {
 	public class ParticipationsController : Controller
 	{
-		[Authorize]
+		//[Authorize]
 		[HttpGet("participations/participate")]
 		public IActionResult Participate()
 		{
 			return View();
 		}
 
-		[Authorize]
+		//[Authorize]
 		[HttpGet("participations/myparticipations")]
 		public IActionResult MyParticipations()
 		{
 			return View();
 		}
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("participations/details")]
 		public IActionResult Details()
 		{

@@ -22,7 +22,6 @@ namespace The_Gifters.Models
             // Below attempts to create a new user.
             IdentityUser identityUser = new IdentityUser
             {
-                //UserName = viewModel.FirstName,
                 UserName = viewModel.Email,
                 Email = viewModel.Email, 
                 PhoneNumber = viewModel.PhoneNumber,

@@ -4,13 +4,6 @@ namespace The_Gifters.Views.Users
 {
 	public class LoginVM
 	{
-		//[Required(ErrorMessage = "Enter an email")]
-		//[EmailAddress]
-		//public string Email { get; set; }
-
-        //[Required]
-        //public string Username { get; set; }
-		
 		[Required]
 		[EmailAddress]
 		[Display(Name = "E-mail")]
