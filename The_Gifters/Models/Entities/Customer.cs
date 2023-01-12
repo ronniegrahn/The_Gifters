@@ -15,5 +15,5 @@ public partial class Customer
 
     public string? PhoneNumber { get; set; }
 
-    public virtual ICollection<Contribution> Contributions { get; } = new List<Contribution>();
+    public virtual ICollection<Participation> Participations { get; } = new List<Participation>();
 }

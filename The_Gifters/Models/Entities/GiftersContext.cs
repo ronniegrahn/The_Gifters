@@ -23,11 +23,11 @@ public partial class GiftersContext : DbContext
 
     public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; }
 
-    public virtual DbSet<Contribution> Contributions { get; set; }
-
     public virtual DbSet<Customer> Customers { get; set; }
 
     public virtual DbSet<Organization> Organizations { get; set; }
+
+    public virtual DbSet<Participation> Participations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -96,25 +96,6 @@ public partial class GiftersContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.AspNetUserTokens).HasForeignKey(d => d.UserId);
         });
 
-        modelBuilder.Entity<Contribution>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Contribu__3214EC07C76113D1");
-
-            entity.Property(e => e.ContributionDate).HasColumnType("datetime");
-            entity.Property(e => e.ContributionEndDate).HasColumnType("date");
-            entity.Property(e => e.SumGenerated).HasColumnType("money");
-
-            entity.HasOne(d => d.Customer).WithMany(p => p.Contributions)
-                .HasForeignKey(d => d.CustomerId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Contribut__Custo__3C69FB99");
-
-            entity.HasOne(d => d.Organization).WithMany(p => p.Contributions)
-                .HasForeignKey(d => d.OrganizationId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Contribut__Organ__3B75D760");
-        });
-
         modelBuilder.Entity<Customer>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Customer__3214EC0782298936");
@@ -130,6 +111,26 @@ public partial class GiftersContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__Organiza__3214EC07DE6F6AE5");
 
             entity.Property(e => e.OrganizationName).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<Participation>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Particip__3214EC073538E14D");
+
+            entity.Property(e => e.Amount).HasColumnType("money");
+            entity.Property(e => e.ParticipationDate).HasColumnType("datetime");
+            entity.Property(e => e.ParticipationEndDate).HasColumnType("date");
+            entity.Property(e => e.SumGenerated).HasColumnType("money");
+
+            entity.HasOne(d => d.Customer).WithMany(p => p.Participations)
+                .HasForeignKey(d => d.CustomerId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Participa__Custo__4AB81AF0");
+
+            entity.HasOne(d => d.Organization).WithMany(p => p.Participations)
+                .HasForeignKey(d => d.OrganizationId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Participa__Organ__49C3F6B7");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -2,10 +2,10 @@
 {
 	public class ParticipateVM
 	{
-		public int Amount { get; set; }
+		public decimal Amount { get; set; }
 		public List<string> OrganizationNames { get; set; }
 		public bool IsRefundable { get; set; }
-		public DateTime StartDate { get; set; }
+		public DateTime StartDate { get; set; } = DateTime.Now;
 		public int UserId { get; set; }
 	}
 }
