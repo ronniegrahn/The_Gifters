@@ -17,7 +17,6 @@ builder.Services.AddTransient<ParticipatesService>();
 builder.Services.AddDbContext<GiftersContext>(o => o.UseSqlServer(connString));
 builder.Services.AddDbContext<IdentityDbContext>(o => o.UseSqlServer(connString));
 
-
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<IdentityDbContext>().AddDefaultTokenProviders();
 
 builder.Services.ConfigureApplicationCookie(o => o.LoginPath = "/users/login");
@@ -25,6 +24,7 @@ builder.Services.ConfigureApplicationCookie(o => o.LoginPath = "/users/login");
 var app = builder.Build();
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication(); // Identifiering
 app.UseAuthorization(); // Beh�righet

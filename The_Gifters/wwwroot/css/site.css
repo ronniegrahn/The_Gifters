@@ -17,6 +17,114 @@ html {
   min-height: 100%;
 }
 
+.logo-container {
+	display: flex;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+
+}
+
+.logo-container .logo {
+	padding-top: 2%;
+	width: 50%;
+}
+
 body {
-  margin-bottom: 60px;
+	height: 100vh;
+	font-family: 'Jura';
+	font-size: 28px;
+	margin-bottom: 60px;
+	background: linear-gradient(150deg, white, rgba(0,0,0,0) 85.71%), linear-gradient(23deg, rgba(45, 74, 26, 1) 0%, rgba(45, 74, 26, 1) 23%, rgba(255,255,255,1) 90%), linear-gradient(350deg, rgba(45, 74, 26, 1) 0%, rgba(105, 155, 44, 1) 23%, rgba(255,255,255,1) 90%);
+}
+
+header {
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+.wrapper {
+/*	display: flex;
+	flex-direction: column;*/
+}
+
+.header-button-container {
+	display: flex;
+	flex-direction: row;
+}
+
+header .button {
+	background-color: #709c2c;
+	color: white;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	width: 70%;
+	margin: 0 auto;
+	background-color: #f0f2ee;
+	border-radius: 7px;
+	box-shadow: 1px 1px 1px 1px rgba(40, 42, 55, 0.2);
+	*/
+}
+
+.container h4 {
+	padding-top: 3%;
+	text-align: center;
+	font-size: 25px;
+	font-weight: 600;
+}
+
+.container p {
+	padding-left: 8%;
+	padding-right: 8%;
+	text-align: center;
+}
+
+/*.container-items:nth-child(1) {
+	display: block;
+	flex-grow: 0;
+	flex-shrink: 1;
+	flex-basis: 100%;
+	align-self: stretch;
+	order: 0;
+	width: 100%;
+	padding-bottom: 10px;
+}*/
+.logo {
+	/*	display: block;
+	flex-grow: 0;
+	flex-shrink: 1;
+	flex-basis: 100%;
+	align-self: stretch;
+	order: 0;
+	width: 80%;
+	padding-bottom: 10px;*/
+}
+
+li {
+	font-size: 20px;
+	text-align: center;
+	margin: 5px;
+	list-style: none;
+}
+
+.participate-links, a {
+/*		display: flex;
+	width: 100%;*/
+	/*flex-direction: row;
+	justify-content: space-between;
+	font-family: 'jura';
+	font-size: 20px;
+	font-weight: 900;
+	color: #2D4A1A;
+	padding-bottom: 10%;*/
+	width: 100%;
+	margin: 20px;
+	font-size: 16px;
+	font-weight: 300;
+	color: #2D4A1A;
 }

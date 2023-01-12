@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using The_Gifters.Models;
 using The_Gifters.Models.Entities;
-using The_Gifters.Views.Contributions;
+using The_Gifters.Views.Participations;
 
 namespace The_Gifters.Controllers
 {

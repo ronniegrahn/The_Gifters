@@ -3,7 +3,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 using The_Gifters.Controllers;
 using The_Gifters.Models.Entities;
-using The_Gifters.Views.Contributions;
+using The_Gifters.Views.Participations;
 
 namespace The_Gifters.Models
 {
