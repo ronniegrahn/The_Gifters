@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using The_Gifters.Models;
 using The_Gifters.Models.Entities;
-using The_Gifters.Views.Contributions;
+using The_Gifters.Views.Participations;
 
 namespace The_Gifters.Controllers
 {
@@ -15,7 +15,7 @@ namespace The_Gifters.Controllers
 			this.participatesService = participatesService;
 		}
 
-	  //[Authorize]
+		//[Authorize]
 		[HttpGet("participations/participate")]
 		public async Task<IActionResult> ParticipateAsync()
 		{
@@ -30,14 +30,14 @@ namespace The_Gifters.Controllers
 		}
 
 		//[Authorize]
-    [HttpGet("participations/myparticipations")]
+		[HttpGet("participations/myparticipations")]
 		public IActionResult MyParticipations()
 		{
 			return View();
 		}
 
-    //[Authorize]
-    [HttpGet("participations/details")]
+		//[Authorize]
+		[HttpGet("participations/details")]
 		public IActionResult Details()
 		{
 			return View();

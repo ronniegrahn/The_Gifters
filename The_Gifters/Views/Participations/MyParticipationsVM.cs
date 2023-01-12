@@ -1,4 +1,4 @@
-﻿namespace The_Gifters.Views.Contributions
+﻿namespace The_Gifters.Views.Participations
 {
 	public class MyParticipationsVM
 	{
