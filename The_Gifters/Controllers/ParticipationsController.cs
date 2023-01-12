@@ -6,60 +6,69 @@ using The_Gifters.Views.Participations;
 
 namespace The_Gifters.Controllers
 {
-	public class ParticipationsController : Controller
-	{
-		private readonly ParticipatesService participatesService;
+    public class ParticipationsController : Controller
+    {
+        private readonly ParticipatesService participatesService;
 
-		public ParticipationsController(ParticipatesService participatesService)
-		{
-			this.participatesService = participatesService;
-		}
+        public ParticipationsController(ParticipatesService participatesService)
+        {
+            this.participatesService = participatesService;
+        }
 
-		//[Authorize]
-		[HttpGet("participations/participate")]
-		public async Task<IActionResult> ParticipateAsync()
-		{
-			var organizationNames = await participatesService.GetOrganizationNamesAsync();
 
-			ParticipateVM model = new ParticipateVM()
-			{
-				OrganizationNames = organizationNames,
-			};
+#if !DEBUG
+[Authorize]
+#endif
+        [HttpGet("participations/participate")]
+        public async Task<IActionResult> ParticipateAsync()
+        {
+            var organizationNames = await participatesService.GetOrganizationNamesAsync();
 
-			return View(model);
-		}
 
-		//[Authorize]
-		[HttpGet("participations/myparticipations")]
-		public IActionResult MyParticipations()
-		{
-			return View();
-		}
+            ParticipateVM model = new ParticipateVM()
+            {
+                OrganizationNames = organizationNames,
+            };
 
-		//[Authorize]
-		[HttpGet("participations/details")]
-		public IActionResult Details()
-		{
-			return View();
-		}
+            return View(model);
+        }
 
-		[HttpPost("participations/participate")]
-		public IActionResult CreateParticipation(ParticipateVM participateVM)
-		{
-			if (!ModelState.IsValid)
-			{
-				return View();
-			}
 
-			var buttonName = Request.Form["Refundable"].Count > 0 ? "Refundable" : "Donate";
+#if !DEBUG
+[Authorize]
+#endif
+        [HttpGet("participations/myparticipations")]
+        public IActionResult MyParticipations()
+        {
+            return View();
+        }
 
-			if (buttonName == "Refundable")
-				participateVM.IsRefundable = true;
-			else
-				participateVM.IsRefundable = false;
+#if !DEBUG
+[Authorize]
+#endif
+        [HttpGet("participations/details")]
+        public IActionResult Details()
+        {
+            return View();
+        }
 
-			participatesService.AddParticipation(participateVM);
-			return RedirectToAction(nameof(MyParticipations));
-		}
-	}
+        [HttpPost("participations/participate")]
+        public IActionResult CreateParticipation(ParticipateVM participateVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var buttonName = Request.Form["Refundable"].Count > 0 ? "Refundable" : "Donate";
+
+            if (buttonName == "Refundable")
+                participateVM.IsRefundable = true;
+            else
+                participateVM.IsRefundable = false;
+
+            participatesService.AddParticipation(participateVM);
+            return RedirectToAction(nameof(MyParticipations));
+        }
+    }
 }
