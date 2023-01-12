@@ -1,4 +1,7 @@
-﻿insert into dbo.Customers (FirstName, LastName, Email, PhoneNumber)
+﻿-- Kör drop table dbo.Contributions först om den redan finns
+
+
+insert into dbo.Customers (FirstName, LastName, Email, PhoneNumber)
 values ('Johan', 'Johansson', 'johansson@gmail.com', '070 123 45 67'),
        ('Alfred', 'Spenat', 'k-alfreds@spenat.nu', '076-765-43-21'),
        ('Bobby', 'Dylan', 'likearolling@stone.com', '0702223355');
@@ -9,10 +12,10 @@ values ('Red Cross', 'The International Committee of the Red Cross (ICRC) is a h
        ('UNICEF', 'UNICEF is an agency of the United Nations responsible for providing humanitarian and developmental aid to children worldwide. The agency is among the most widespread and recognizable social welfare organizations in the world, with a presence in 192 countries and territories. UNICEF''s activities include providing immunizations and disease prevention, administering treatment for children and mothers with HIV, enhancing childhood and maternal nutrition, improving sanitation, promoting education, and providing emergency relief in response to disasters.'),
        ('Women to Women', 'Women for Women is a nonprofit humanitarian organization that provides practical and moral support to female survivors of war. WfWI helps such women rebuild their lives after war''s devastation through a year-long tiered program that begins with direct financial aid and emotional counseling and includes life skills (e.g., literacy, numeracy) training if necessary, rights awareness education, health education, job skills training and small business development.');
 
-insert into dbo.Contributions (Amount, ContributionDate, TimeFrame, ContributionEndDate, SumGenerated, OrganizationId, CustomerId)
-values (15000, '2022-01-01', 12, '2022-12-31', 1250, 1001, 1001),
-       (500, '2022-01-01', 6, '2022-06-30', 300, 1002, 1002),
-       (2000, '2022-01-01', null, null, null, 1003, 1003);
+insert into dbo.[Participations] (Amount, ParticipationDate, TimeFrame, ParticipationEndDate, SumGenerated, OrganizationId, CustomerId)
+values (15000, '2022-01-01', 12, '2022-12-31', 1250, 1, 1),
+       (500, '2022-01-01', 6, '2022-06-30', 300, 2, 2),
+       (2000, '2022-01-01', null, null, null, 3, 3);
 
 
 select * from dbo.Customers
@@ -23,6 +26,35 @@ alter table dbo.Customers --AspNetUsers
 Add [AspNetUsersId] int NOT NULL REFERENCES AspNetUsers(Id)
 
 
-delete from dbo.Customers
-delete from dbo.Contributions
-delete from dbo.Organizations
+
+drop table dbo.Contributions
+
+
+CREATE TABLE [dbo].[Participations] (
+    [Id]                  INT      IDENTITY (1, 1) NOT NULL,
+    [Amount]              Money    NOT NULL,
+    [ParticipationDate]   DATETIME NOT NULL,
+    [TimeFrame]           INT      NULL,
+    [ParticipationEndDate] DATE     NULL,
+    [SumGenerated]        MONEY    NULL,
+    [OrganizationId]      INT      NOT NULL REFERENCES [dbo].[Organizations] ([Id]),
+    [CustomerId]          INT      NOT NULL REFERENCES [dbo].[Customers] ([Id])
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+);
+
+
+--CREATE TABLE [dbo].[Contributions] (
+--    [Id]                  INT      IDENTITY (1, 1) NOT NULL,
+--    [Amount]              INT      NOT NULL,
+--    [ContributionDate]    DATETIME NOT NULL,
+--    [TimeFrame]           INT      NULL,
+--    [ContributionEndDate] DATE     NULL,
+--    [SumGenerated]        MONEY    NULL,
+--    [OrganizationId]      INT      NOT NULL REFERENCES [dbo].[Organizations] ([Id]),
+--    [CustomerId]          INT      NOT NULL REFERENCES [dbo].[Customers] ([Id])
+--    PRIMARY KEY CLUSTERED ([Id] ASC),
+--);
+
+--delete from dbo.Customers
+--delete from dbo.Contributions
+--delete from dbo.Organizations
