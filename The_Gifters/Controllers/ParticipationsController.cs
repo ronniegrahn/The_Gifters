@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using The_Gifters.Models;
 using The_Gifters.Models.Entities;
-using The_Gifters.Views.Contributions;
+using The_Gifters.Views.Participations;
 
 namespace The_Gifters.Controllers
 {
@@ -15,6 +15,7 @@ namespace The_Gifters.Controllers
             this.participatesService = participatesService;
         }
 
+
 #if !DEBUG
 [Authorize]
 #endif
@@ -23,6 +24,7 @@ namespace The_Gifters.Controllers
         {
             var organizationNames = await participatesService.GetOrganizationNamesAsync();
 
+
             ParticipateVM model = new ParticipateVM()
             {
                 OrganizationNames = organizationNames,
@@ -30,6 +32,7 @@ namespace The_Gifters.Controllers
 
             return View(model);
         }
+
 
 #if !DEBUG
 [Authorize]

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using The_Gifters.Models;
-using The_Gifters.Views.Contributions;
+using The_Gifters.Views.Participations;
 using The_Gifters.Views.Users;
 
 namespace The_Gifters.Controllers

@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Contributions]
+﻿CREATE TABLE [dbo].[Participations]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Amount] INT NOT NULL, 
