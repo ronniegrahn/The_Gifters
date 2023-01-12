@@ -12,8 +12,8 @@ namespace The_Gifters.Controllers
 			return View();
 		}
 
-        [Authorize]
-        [HttpGet("participations/myparticipations")]
+		[Authorize]
+		[HttpGet("participations/myparticipations")]
 		public IActionResult MyParticipations()
 		{
 			return View();

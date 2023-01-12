@@ -18,10 +18,12 @@ namespace The_Gifters.Models
 
         public async Task<string> TryRegisterAsync(CreateVM viewModel)
         {
-            // Todo: Try to create a new user
+
+            // Below attempts to create a new user.
             IdentityUser identityUser = new IdentityUser
             {
-                UserName = viewModel.FirstName,
+                //UserName = viewModel.FirstName,
+                UserName = viewModel.Email,
                 Email = viewModel.Email, 
                 PhoneNumber = viewModel.PhoneNumber,
             };
@@ -37,29 +39,9 @@ namespace The_Gifters.Models
                 return createResult.Errors.First().Description;
         }
 
-        //public async Task<string> TryRegisterAsync(CreateVM viewModel)
-        //{
-        //    // Todo: Try to create a new user
-        //    IdentityUser identityUser = new IdentityUser
-        //    {
-        //        UserName = viewModel.FirstName,
-        //        Email = viewModel.LastName
-        //    };
-
-        //    IdentityResult createResult = await
-        //        userManager.CreateAsync(identityUser, viewModel.Password);
-
-        //    bool createSucceeded = createResult.Succeeded;
-
-        //    if (createSucceeded)
-        //        return null;
-        //    else
-        //        return createResult.Errors.First().Description;
-        //}
-
         public async Task<bool> TryLoginAsync(LoginVM viewModel)
         {
-            // Todo: Try to sign user
+            // Below tries to sign in user.
             SignInResult signInResult = await signInManager.PasswordSignInAsync(
                 viewModel.Username,
                 viewModel.Password,
@@ -68,6 +50,8 @@ namespace The_Gifters.Models
 
             bool signInSucceeded = signInResult.Succeeded;
 
+            // Returns 'true' if sign in successful
+            // and 'false' if sign in not successful.
             return signInSucceeded;
         }
     }

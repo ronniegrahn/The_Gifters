@@ -8,8 +8,13 @@ namespace The_Gifters.Views.Users
 		//[EmailAddress]
 		//public string Email { get; set; }
 
-        [Required]
-        public string Username { get; set; }
+        //[Required]
+        //public string Username { get; set; }
+		
+		[Required]
+		[EmailAddress]
+		[Display(Name = "E-mail")]
+		public string Username { get; set; }
 
         [Required(ErrorMessage = "Enter a password")]
 		[DataType(DataType.Password)]

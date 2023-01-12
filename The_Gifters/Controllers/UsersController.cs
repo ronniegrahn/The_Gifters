@@ -32,17 +32,17 @@ namespace The_Gifters.Controllers
             if (!ModelState.IsValid)
                 return View();
 
-            // Check if credentials is valid (and set auth cookie)
+            // Check if credentials is valid (and set auth cookie).
             var success = await usersService.TryLoginAsync(viewModel);
+
             if (!success)
             {
-                // Show error
+                // Show error message if login failed.
                 ModelState.AddModelError(string.Empty, "Login failed");
                 return View();
             }
 
-            // Redirect user
-            //return RedirectToAction(nameof(Members));
+            // Redirect user when succcessfully logged in.
             return Content("You have logged in!");
             //return RedirectToAction(nameof(ParticipationsController.MyParticipations));
         }
@@ -59,24 +59,21 @@ namespace The_Gifters.Controllers
             if (!ModelState.IsValid)
                 return View();
 
-            // Try to register user
+            // Below tries to create new user and return a message
+            // where 'null' is success and 'not null' means that
+            // there is an error.
             var errorMessage = await usersService.TryRegisterAsync(viewModel);
 
             if (errorMessage != null)
             {
-                // Show error
+                // This here shows error message to user if there is one.
                 ModelState.AddModelError(string.Empty, errorMessage);
                 return View();
             }
 
-            //// This is my own test of 'errorMessage'
-            //if (errorMessage != null)
-            //{
-            //    return Content("Something went wrong!");
-            //}
-
+            // When new user is created user is redirected to the
+            // login page. Can be improved into automated loggin in.
             return RedirectToAction(nameof(Login));
-            //return View();
         }
     }
 }
