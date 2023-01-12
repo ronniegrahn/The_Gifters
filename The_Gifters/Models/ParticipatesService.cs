@@ -2,13 +2,14 @@
 
 namespace The_Gifters.Models
 {
-	public class ParticipateService
+	public class ParticipatesService
 	{
 		private readonly GiftersContext giftersContext;
 
-		public ParticipateService(GiftersContext giftersContext)
+		public ParticipatesService(GiftersContext giftersContext)
 		{
 			this.giftersContext = giftersContext;
 		}
+
 	}
 }
