@@ -66,7 +66,7 @@ namespace The_Gifters.Controllers
         }
 
         [HttpPost("participations/participate")]
-        public IActionResult CreateParticipation(ParticipateVM participateVM)
+        public async Task<IActionResult> CreateParticipation(ParticipateVM participateVM)
         {
             if (!ModelState.IsValid)
             {
@@ -81,8 +81,9 @@ namespace The_Gifters.Controllers
                 participateVM.IsRefundable = false;
 
 
-			participatesService.AddParticipation(participateVM);
-			return RedirectToAction(nameof(MyParticipationsAsync));
+			await participatesService.AddParticipation(participateVM);
+			return RedirectToAction("MyParticipations", "Participations");
+			//return RedirectToAction(nameof(MyParticipationsAsync));
 		}
 	}
 
