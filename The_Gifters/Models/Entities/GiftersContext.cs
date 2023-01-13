@@ -98,7 +98,9 @@ public partial class GiftersContext : DbContext
 
         modelBuilder.Entity<Customer>(entity =>
         {
+
             entity.HasKey(e => e.Id).HasName("PK__Customer__3214EC07782C5604");
+
 
             entity.Property(e => e.AspNetUsersId).HasMaxLength(450);
             entity.Property(e => e.Email).HasMaxLength(50);
@@ -113,14 +115,18 @@ public partial class GiftersContext : DbContext
 
         modelBuilder.Entity<Organization>(entity =>
         {
+
             entity.HasKey(e => e.Id).HasName("PK__Organiza__3214EC072067BFF6");
+
 
             entity.Property(e => e.OrganizationName).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Participation>(entity =>
         {
+
             entity.HasKey(e => e.Id).HasName("PK__Particip__3214EC07B76CE0DA");
+
 
             entity.Property(e => e.Amount).HasColumnType("money");
             entity.Property(e => e.ParticipationDate).HasColumnType("datetime");

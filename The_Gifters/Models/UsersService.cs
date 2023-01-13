@@ -18,7 +18,6 @@ namespace The_Gifters.Models
 
         public async Task<string> TryRegisterAsync(CreateVM viewModel)
         {
-
             // Below attempts to create a new user.
             IdentityUser identityUser = new IdentityUser
             {
