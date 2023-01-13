@@ -16,9 +16,9 @@ namespace The_Gifters.Controllers
         }
 
 
-#if !DEBUG
-[Authorize]
-#endif
+        #if !DEBUG
+        [Authorize]
+        #endif
         [HttpGet("participations/participate")]
         public async Task<IActionResult> ParticipateAsync()
         {
@@ -34,18 +34,18 @@ namespace The_Gifters.Controllers
         }
 
 
-#if !DEBUG
-[Authorize]
-#endif
+        #if !DEBUG
+        [Authorize]
+        #endif
         [HttpGet("participations/myparticipations")]
         public IActionResult MyParticipations()
         {
             return View();
         }
 
-#if !DEBUG
-[Authorize]
-#endif
+        #if !DEBUG
+        [Authorize]
+        #endif
         [HttpGet("participations/details")]
         public IActionResult Details()
         {

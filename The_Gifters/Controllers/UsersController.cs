@@ -43,7 +43,12 @@ namespace The_Gifters.Controllers
             }
 
             // Redirect user when succcessfully logged in.
-            return RedirectToAction(nameof(Index));
+            //return RedirectToAction(nameof(Index));
+            //return RedirectToAction("MyParticipations", "ParticipationsController");
+            //return View("../participations/participate");
+            //return RedirectToAction("Index", "Users");
+            //return RedirectToAction("Details", "Participations");
+            return RedirectToAction("MyParticipations", "Participations");
         }
 
         [HttpGet("users/create")]
