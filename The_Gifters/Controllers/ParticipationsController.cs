@@ -29,11 +29,27 @@ namespace The_Gifters.Controllers
 			return View(model);
 		}
 
-		//[Authorize]
-		[HttpGet("participations/myparticipations")]
-		public IActionResult MyParticipations()
+		//[HttpGet("participations/myparticipations/")]
+		//public async Task<IActionResult> MyParticipationsAsync()
+		//{
+		//	var myParticipationsVM = await participatesService.GetMyParticipationsVMAsync(1006); // Måste ändras till en variabel när användare är på plats
+
+
+		[Authorize]
+
+		[HttpGet("participations/myparticipations/")]
+		public async Task<IActionResult> MyParticipationsAsync()
 		{
-			return View();
+			var myParticipationsVM = await participatesService.GetMyParticipationsVMAsync();
+
+
+
+			var model = new MyParticipationsVM()
+			{
+				Participations = myParticipationsVM,
+				RunningTotal = myParticipationsVM.Sum(x => x.ParticipationAmount),
+			};
+			return View(model);
 		}
 
 		//[Authorize]
@@ -59,7 +75,7 @@ namespace The_Gifters.Controllers
 				participateVM.IsRefundable = false;
 
 			participatesService.AddParticipation(participateVM);
-			return RedirectToAction(nameof(MyParticipations));
+			return RedirectToAction(nameof(MyParticipationsAsync));
 		}
 	}
 }
