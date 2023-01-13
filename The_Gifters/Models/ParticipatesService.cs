@@ -79,11 +79,16 @@ namespace The_Gifters.Models
 
             string userId = userManager.GetUserId(accessor.HttpContext.User);
 
+            var user = await userManager.FindByIdAsync(userId);
+
+            var customer = giftersContext.Customers.First(x => x.AspNetUsersId.Equals(userId));
+
 
             List<ParticipationVM> participationVMs = new List<ParticipationVM>();
 
+
             var participations = giftersContext.Participations
-                .Where(p => p.CustomerId == Convert.ToInt32(userId))
+                .Where(p => p.CustomerId == customer.Id)
                 .ToList();
 
             foreach (var participation in participations)
@@ -97,8 +102,6 @@ namespace The_Gifters.Models
                     OrganizationDescription = giftersContext.Organizations.First(x => x.Id == participation.OrganizationId).Description,
                 });
             }
-
-
             return participationVMs;
         }
     }

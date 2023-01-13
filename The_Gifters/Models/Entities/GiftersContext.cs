@@ -98,24 +98,29 @@ public partial class GiftersContext : DbContext
 
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Customer__3214EC0782298936");
+            entity.HasKey(e => e.Id).HasName("PK__Customer__3214EC07782C5604");
 
+            entity.Property(e => e.AspNetUsersId).HasMaxLength(450);
             entity.Property(e => e.Email).HasMaxLength(50);
             entity.Property(e => e.FirstName).HasMaxLength(50);
             entity.Property(e => e.LastName).HasMaxLength(50);
             entity.Property(e => e.PhoneNumber).HasMaxLength(50);
+
+            entity.HasOne(d => d.AspNetUsers).WithMany(p => p.Customers)
+                .HasForeignKey(d => d.AspNetUsersId)
+                .HasConstraintName("FK__Customers__AspNe__6FE99F9F");
         });
 
         modelBuilder.Entity<Organization>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Organiza__3214EC07DE6F6AE5");
+            entity.HasKey(e => e.Id).HasName("PK__Organiza__3214EC072067BFF6");
 
             entity.Property(e => e.OrganizationName).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Participation>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Particip__3214EC073538E14D");
+            entity.HasKey(e => e.Id).HasName("PK__Particip__3214EC07B76CE0DA");
 
             entity.Property(e => e.Amount).HasColumnType("money");
             entity.Property(e => e.ParticipationDate).HasColumnType("datetime");
@@ -125,12 +130,12 @@ public partial class GiftersContext : DbContext
             entity.HasOne(d => d.Customer).WithMany(p => p.Participations)
                 .HasForeignKey(d => d.CustomerId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Participa__Custo__4AB81AF0");
+                .HasConstraintName("FK__Participa__Custo__619B8048");
 
             entity.HasOne(d => d.Organization).WithMany(p => p.Participations)
                 .HasForeignKey(d => d.OrganizationId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Participa__Organ__49C3F6B7");
+                .HasConstraintName("FK__Participa__Organ__60A75C0F");
         });
 
         OnModelCreatingPartial(modelBuilder);
