@@ -8,6 +8,23 @@
 
 <input type="submit" value="Participate" />
 
-<h4>Active contributions</h4>
-<p>You have generated X SEK in contributions to your chosen organizations. Thank you for your help!</p>
+<h4>Your active contributions</h4>
+
+@foreach (var item in Model.Participations)
+{
+
+    <div class="active-participations">
+        
+        <h3 class="panel-title">@item.OrganizationName</h3>
+        
+        <i>
+            <p class="participationamount">Participation @item.ParticipationAmount SEK</p>
+        </i>
+        
+        <p class="panel-title">@item.OrganizationDescription</p>
+        
+    </div>
+}
+
+<p>You have generated <i>@Model.RunningTotal</i> SEK in contributions to your chosen organizations. Thank you for your help!</p>
 <p>Together, Give For Life participants have contributed 100 000 SEK to different organizations.</p>
