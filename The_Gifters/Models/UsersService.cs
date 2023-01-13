@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using The_Gifters.Models.Entities;
 using The_Gifters.Views.Users;
 
 namespace The_Gifters.Models
@@ -8,12 +9,14 @@ namespace The_Gifters.Models
     {
         UserManager<IdentityUser> userManager;
         SignInManager<IdentityUser> signInManager;
+        GiftersContext giftersContext;
 
-        public UsersService(IdentityDbContext identityDbContext, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public UsersService(IdentityDbContext identityDbContext, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, GiftersContext giftersContext)
         {
             identityDbContext.Database.EnsureCreated();
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.giftersContext = giftersContext;
         }
 
         public async Task<string> TryRegisterAsync(CreateVM viewModel)
@@ -32,7 +35,19 @@ namespace The_Gifters.Models
             bool createSucceeded = createResult.Succeeded;
 
             if (createSucceeded)
+            {
+                giftersContext.Customers.Add(new Customer
+                {
+                    FirstName = viewModel.FirstName,
+                    LastName = viewModel.LastName,
+                    Email = viewModel.Email,
+                    PhoneNumber = viewModel.PhoneNumber,
+                    AspNetUsersId = identityUser.Id
+                });
+                giftersContext.SaveChanges();
                 return null;
+
+            }
             else
                 return createResult.Errors.First().Description;
         }
