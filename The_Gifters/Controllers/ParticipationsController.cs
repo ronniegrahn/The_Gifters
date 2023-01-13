@@ -15,15 +15,13 @@ namespace The_Gifters.Controllers
             this.participatesService = participatesService;
         }
 
-
-#if !DEBUG
-[Authorize]
-#endif
+        #if !DEBUG
+        [Authorize]
+        #endif
         [HttpGet("participations/participate")]
         public async Task<IActionResult> ParticipateAsync()
         {
             var organizationNames = await participatesService.GetOrganizationNamesAsync();
-
 
             ParticipateVM model = new ParticipateVM()
             {
@@ -33,19 +31,18 @@ namespace The_Gifters.Controllers
             return View(model);
         }
 
-
-#if !DEBUG
-[Authorize]
-#endif
+        #if !DEBUG
+        [Authorize]
+        #endif
         [HttpGet("participations/myparticipations")]
         public IActionResult MyParticipations()
         {
             return View();
         }
 
-#if !DEBUG
-[Authorize]
-#endif
+        #if !DEBUG
+        [Authorize]
+        #endif
         [HttpGet("participations/details")]
         public IActionResult Details()
         {
