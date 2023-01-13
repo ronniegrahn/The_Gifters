@@ -43,11 +43,6 @@ namespace The_Gifters.Controllers
             }
 
             // Redirect user when succcessfully logged in.
-            //return RedirectToAction(nameof(Index));
-            //return RedirectToAction("MyParticipations", "ParticipationsController");
-            //return View("../participations/participate");
-            //return RedirectToAction("Index", "Users");
-            //return RedirectToAction("Details", "Participations");
             return RedirectToAction("MyParticipations", "Participations");
         }
 
@@ -75,9 +70,23 @@ namespace The_Gifters.Controllers
                 return View();
             }
 
-            // When new user is created user is redirected to the
-            // login page. Can be improved into automated loggin in.
-            return RedirectToAction(nameof(Login));
+			// Creating viewModel to user for logging in.l
+			LoginVM testingStuff = new LoginVM()
+			{
+				Username = viewModel.Email,
+				Password = viewModel.Password,
+			};
+
+			// Check if credentials is valid (and set auth cookie).
+			var result = await usersService.TryLoginAsync(testingStuff);
+            if (result)
+				return RedirectToAction("MyParticipations", "Participations");
+			else
+				return RedirectToAction(nameof(Login));
+
+			// When new user is created user is redirected to the
+			// login page. Can be improved into automated loggin in.
+			//return RedirectToAction(nameof(Login));
         }
     }
 }

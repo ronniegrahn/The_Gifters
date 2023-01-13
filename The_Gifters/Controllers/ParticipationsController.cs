@@ -15,7 +15,6 @@ namespace The_Gifters.Controllers
             this.participatesService = participatesService;
         }
 
-
         #if !DEBUG
         [Authorize]
         #endif
@@ -24,7 +23,6 @@ namespace The_Gifters.Controllers
         {
             var organizationNames = await participatesService.GetOrganizationNamesAsync();
 
-
             ParticipateVM model = new ParticipateVM()
             {
                 OrganizationNames = organizationNames,
@@ -32,7 +30,6 @@ namespace The_Gifters.Controllers
 
             return View(model);
         }
-
 
         #if !DEBUG
         [Authorize]
