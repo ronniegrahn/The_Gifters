@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
@@ -23,14 +24,20 @@ namespace The_Gifters.Models
             this.userManager = userManager;
         }
 
-        public async void AddParticipation(ParticipateVM participateVM)
+        public async Task AddParticipation(ParticipateVM participateVM)
         {
-            DateTime dateTime = DateTime.Now;
+			await Task.Delay(0);
+
+			DateTime dateTime = DateTime.Now;
             DateTime? participationEndDate = DateTime.Now;
             int? timeFrame = 0;
 
-            string organizationName = participateVM.OrganizationNames[0];
-            var organization = giftersContext.Organizations.First(x => x.OrganizationName.Equals(organizationName));
+			string userId = userManager.GetUserId(accessor.HttpContext.User);
+			var user = await userManager.FindByIdAsync(userId);
+			var customer = await giftersContext.Customers.FirstAsync(x => x.AspNetUsersId.Equals(userId));
+
+			string organizationName = participateVM.OrganizationNames[0];
+            var organization = await giftersContext.Organizations.FirstAsync(x => x.OrganizationName.Equals(organizationName));
 
 
 
@@ -53,10 +60,10 @@ namespace The_Gifters.Models
                 OrganizationId = organization.Id,
                 TimeFrame = timeFrame,
                 ParticipationEndDate = participationEndDate,
-                CustomerId = 1, //Måste ändras till en variabel när användare är på plats
+                CustomerId = customer.Id, //Måste ändras till en variabel när användare är på plats
             });
 
-            giftersContext.SaveChanges();
+            await giftersContext.SaveChangesAsync();
         }
 
         public async Task<List<string>> GetOrganizationNamesAsync()
