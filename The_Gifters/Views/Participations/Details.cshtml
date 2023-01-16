@@ -1,11 +1,23 @@
-﻿
-@model DetailsVM
+﻿@model DetailsVM
 @{
-	ViewData["Title"] = "Details";
+    ViewData["Title"] = "Details";
 }
 
-@Html.Partial("_LoggedInMenu")
-@Html.Partial("_Logo")
+
+
+<partial name="_LoggedInMenu" />
+<partial name="_Logo" />
+
+
+
+<h4>My Details</h4>
+
+
+
+<h1>@Model.ParticipationAmount</h1>
+
+
+
 
 <input type="submit" value="Convert to donation" />
 <input type="submit" value="Refund" />
