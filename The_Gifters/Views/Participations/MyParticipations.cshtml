@@ -15,7 +15,10 @@
 
     <div class="active-participations">
         
-        <h3 class="panel-title">@item.OrganizationName</h3>
+        <h3 class="panel-title">
+            <a asp-controller="Participations" asp-action="Details" asp-route-id="@item.ParticipationId"> @item.OrganizationName</a>
+                
+        </h3>
         
         <i>
             <p class="participationamount">Participation @item.ParticipationAmount SEK</p>

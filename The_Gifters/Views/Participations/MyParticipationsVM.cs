@@ -15,6 +15,7 @@ namespace The_Gifters.Views.Participations
 		public double ParticipationAmount { get; set; }
 		public double? ContributionAmount { get; set; }
 		public DateTime StartDate { get; set; }
+		public int ParticipationId { get; set; }
 	}
 }
 

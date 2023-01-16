@@ -26,17 +26,15 @@ namespace The_Gifters.Models
 
         public async Task AddParticipation(ParticipateVM participateVM)
         {
-			await Task.Delay(0);
+            await Task.Delay(0);
 
-			DateTime dateTime = DateTime.Now;
+            DateTime dateTime = DateTime.Now;
             DateTime? participationEndDate = DateTime.Now;
             int? timeFrame = 0;
 
-			string userId = userManager.GetUserId(accessor.HttpContext.User);
-			var user = await userManager.FindByIdAsync(userId);
-			var customer = await giftersContext.Customers.FirstAsync(x => x.AspNetUsersId.Equals(userId));
+            int customerId = await GetCustomerIdAsync();
 
-			string organizationName = participateVM.OrganizationNames[0];
+            string organizationName = participateVM.OrganizationNames[0];
             var organization = await giftersContext.Organizations.FirstAsync(x => x.OrganizationName.Equals(organizationName));
 
 
@@ -60,11 +58,12 @@ namespace The_Gifters.Models
                 OrganizationId = organization.Id,
                 TimeFrame = timeFrame,
                 ParticipationEndDate = participationEndDate,
-                CustomerId = customer.Id, //Måste ändras till en variabel när användare är på plats
+                CustomerId = customerId, //Måste ändras till en variabel när användare är på plats
             });
 
             await giftersContext.SaveChangesAsync();
         }
+
 
         public async Task<List<string>> GetOrganizationNamesAsync()
         {
@@ -84,18 +83,13 @@ namespace The_Gifters.Models
         {
             await Task.Delay(0);
 
-            string userId = userManager.GetUserId(accessor.HttpContext.User);
-
-            var user = await userManager.FindByIdAsync(userId);
-
-            var customer = giftersContext.Customers.First(x => x.AspNetUsersId.Equals(userId));
-
+            int customerId = await GetCustomerIdAsync();
 
             List<ParticipationVM> participationVMs = new List<ParticipationVM>();
 
 
             var participations = giftersContext.Participations
-                .Where(p => p.CustomerId == customer.Id)
+                .Where(p => p.CustomerId == customerId)
                 .ToList();
 
             foreach (var participation in participations)
@@ -107,50 +101,73 @@ namespace The_Gifters.Models
                     ContributionAmount = Convert.ToDouble(participation.SumGenerated),
                     OrganizationName = giftersContext.Organizations.First(x => x.Id == participation.OrganizationId).OrganizationName,
                     OrganizationDescription = giftersContext.Organizations.First(x => x.Id == participation.OrganizationId).Description,
+                    ParticipationId = participation.Id,
                 });
             }
             return participationVMs;
         }
 
-        public async Task<List<DetailsVM>> GetDetailsAsync()
+        public async Task<DetailsVM> GetDetailsAsync(int participationId)
         {
             string tempOrg = "Red Cross";
 
+            int customerId = await GetCustomerIdAsync();
+
+            var participations2 = await giftersContext.Participations
+                .Where(p => p.CustomerId == customerId)
+                .ToListAsync();
+
+            var theParticipation = participations2.FirstOrDefault(x => x.Id == participationId);
 
 
-            string userId = userManager.GetUserId(accessor.HttpContext.User);
-            var user = await userManager.FindByIdAsync(userId);
-            var customer = giftersContext.Customers.First(x => x.AspNetUsersId.Equals(userId));
-
-
-
-            List<DetailsVM> detailsVM = new List<DetailsVM>();
-
-
-
-            var donationOrganisation = giftersContext.Participations
-                .Where(p => p.CustomerId == customer.Id)
-                .Join(giftersContext.Organizations, p => p.OrganizationId, o => o.Id, (p, o) => new { p, o })
-                .Where(x => x.o.OrganizationName == tempOrg)
-                .ToList();
-
-
-
-            foreach (var item in donationOrganisation)
+            var detailsVM = new DetailsVM
             {
-                detailsVM.Add(new DetailsVM
-                {
-                    ParticipationDate = item.p.ParticipationDate,
-                    ParticipationAmount = Convert.ToDouble(item.p.Amount),
-                    ParticipationEndDate = item.p.ParticipationEndDate,
-                    ParticipationTimeFrame = item.p.TimeFrame,
-                    ParticipationSumGenerated = Convert.ToDouble(item.p.SumGenerated),
-                    OrganizationName = item.o.OrganizationName,
-                    OrganizationDescription = item.o.Description,
-                });
-            }
+                ParticipationDate = theParticipation.ParticipationDate,
+                ParticipationAmount = Convert.ToDouble(theParticipation.Amount),
+                ParticipationEndDate = theParticipation.ParticipationEndDate,
+                ParticipationTimeFrame = theParticipation.TimeFrame,
+                ParticipationSumGenerated = Convert.ToDouble(theParticipation.SumGenerated),
+                OrganizationName = giftersContext.Organizations.First(x => x.Id == theParticipation.OrganizationId).OrganizationName,
+                OrganizationDescription = giftersContext.Organizations.First(x => x.Id == theParticipation.OrganizationId).Description,
+            };
 
             return detailsVM;
+
+            //var participations = giftersContext.Participations
+            //    .Where(p => p.CustomerId == customerId && p.Id == participationId)
+            //    .ToList();
+
+            //// List<DetailsVM> detailsVM = new List<DetailsVM>();
+
+            //var donationOrganisation = giftersContext.Participations
+            //    .Where(p => p.CustomerId == customerId)
+            //    .Join(giftersContext.Organizations, p => p.OrganizationId, o => o.Id, (p, o) => new { p, o })
+            //    .Where(x => x.o.OrganizationName == tempOrg)
+            //    .ToList();
+
+            //foreach (var item in donationOrganisation)
+            //{
+            //detailsVM.Add(new DetailsVM
+            //var detailsVM = new DetailsVM
+            //{
+            //    ParticipationDate = item.p.ParticipationDate,
+            //    ParticipationAmount = Convert.ToDouble(item.p.Amount),
+            //    ParticipationEndDate = item.p.ParticipationEndDate,
+            //    ParticipationTimeFrame = item.p.TimeFrame,
+            //    ParticipationSumGenerated = Convert.ToDouble(item.p.SumGenerated),
+            //    OrganizationName = item.o.OrganizationName,
+            //    OrganizationDescription = item.o.Description,
+            //};
+            //}
+
+        }
+        private async Task<int> GetCustomerIdAsync()
+        {
+            string userId = userManager.GetUserId(accessor.HttpContext.User);
+            var user = await userManager.FindByIdAsync(userId);
+            var customer = await giftersContext.Customers.FirstAsync(x => x.AspNetUsersId.Equals(userId));
+
+            return customer.Id;
         }
     }
 }
