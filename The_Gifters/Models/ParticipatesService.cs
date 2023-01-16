@@ -111,5 +111,46 @@ namespace The_Gifters.Models
             }
             return participationVMs;
         }
+
+        public async Task<List<DetailsVM>> GetDetailsAsync()
+        {
+            string tempOrg = "Red Cross";
+
+
+
+            string userId = userManager.GetUserId(accessor.HttpContext.User);
+            var user = await userManager.FindByIdAsync(userId);
+            var customer = giftersContext.Customers.First(x => x.AspNetUsersId.Equals(userId));
+
+
+
+            List<DetailsVM> detailsVM = new List<DetailsVM>();
+
+
+
+            var donationOrganisation = giftersContext.Participations
+                .Where(p => p.CustomerId == customer.Id)
+                .Join(giftersContext.Organizations, p => p.OrganizationId, o => o.Id, (p, o) => new { p, o })
+                .Where(x => x.o.OrganizationName == tempOrg)
+                .ToList();
+
+
+
+            foreach (var item in donationOrganisation)
+            {
+                detailsVM.Add(new DetailsVM
+                {
+                    ParticipationDate = item.p.ParticipationDate,
+                    ParticipationAmount = Convert.ToDouble(item.p.Amount),
+                    ParticipationEndDate = item.p.ParticipationEndDate,
+                    ParticipationTimeFrame = item.p.TimeFrame,
+                    ParticipationSumGenerated = Convert.ToDouble(item.p.SumGenerated),
+                    OrganizationName = item.o.OrganizationName,
+                    OrganizationDescription = item.o.Description,
+                });
+            }
+
+            return detailsVM;
+        }
     }
 }

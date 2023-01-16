@@ -15,9 +15,9 @@ namespace The_Gifters.Controllers
             this.participatesService = participatesService;
         }
 
-        #if !DEBUG
+#if !DEBUG
         [Authorize]
-        #endif
+#endif
         [HttpGet("participations/participate")]
         public async Task<IActionResult> ParticipateAsync()
         {
@@ -32,37 +32,43 @@ namespace The_Gifters.Controllers
         }
 
 
-		//[HttpGet("participations/myparticipations/")]
-		//public async Task<IActionResult> MyParticipationsAsync()
-		//{
-		//	var myParticipationsVM = await participatesService.GetMyParticipationsVMAsync(1006); // M�ste �ndras till en variabel n�r anv�ndare �r p� plats
+        //[HttpGet("participations/myparticipations/")]
+        //public async Task<IActionResult> MyParticipationsAsync()
+        //{
+        //	var myParticipationsVM = await participatesService.GetMyParticipationsVMAsync(1006); // M�ste �ndras till en variabel n�r anv�ndare �r p� plats
 
 
-		[Authorize]
-
-		[HttpGet("participations/myparticipations/")]
-		public async Task<IActionResult> MyParticipationsAsync()
-		{
-			var myParticipationsVM = await participatesService.GetMyParticipationsVMAsync();
-
-
-
-			var model = new MyParticipationsVM()
-			{
-				Participations = myParticipationsVM,
-				RunningTotal = myParticipationsVM.Sum(x => x.ParticipationAmount),
-			};
-			return View(model);
-		}
-
-
-        #if !DEBUG
         [Authorize]
-        #endif
-        [HttpGet("participations/details")]
-        public IActionResult Details()
+
+        [HttpGet("participations/myparticipations/")]
+        public async Task<IActionResult> MyParticipationsAsync()
         {
-            return View();
+            var myParticipationsVM = await participatesService.GetMyParticipationsVMAsync();
+
+
+
+            var model = new MyParticipationsVM()
+            {
+                Participations = myParticipationsVM,
+                RunningTotal = myParticipationsVM.Sum(x => x.ParticipationAmount),
+            };
+            return View(model);
+        }
+
+
+#if !DEBUG
+        [Authorize]
+#endif
+        [HttpGet("participations/details")]
+        public async Task<IActionResult> Details()
+        {
+            var getDetailsVM = await participatesService.GetDetailsAsync();
+            var model = new DetailsVM()
+            {
+                ParticipationAmount = 300//getDetailsVM.First().ParticipationAmount,
+            };
+
+            return View(model);
         }
 
         [HttpPost("participations/participate")]
@@ -80,11 +86,9 @@ namespace The_Gifters.Controllers
             else
                 participateVM.IsRefundable = false;
 
-
 			await participatesService.AddParticipation(participateVM);
 			return RedirectToAction("MyParticipations", "Participations");
-			//return RedirectToAction(nameof(MyParticipationsAsync));
+
 		}
 	}
-
 }
