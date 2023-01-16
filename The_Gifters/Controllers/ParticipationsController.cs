@@ -59,14 +59,10 @@ namespace The_Gifters.Controllers
 #if !DEBUG
         [Authorize]
 #endif
-        [HttpGet("participations/details")]
-        public async Task<IActionResult> Details()
+        [HttpGet("participations/details/{id}")]
+        public async Task<IActionResult> Details(int id)
         {
-            var getDetailsVM = await participatesService.GetDetailsAsync();
-            var model = new DetailsVM()
-            {
-                ParticipationAmount = 300//getDetailsVM.First().ParticipationAmount,
-            };
+            var model = await participatesService.GetDetailsAsync(id);
 
             return View(model);
         }
@@ -86,9 +82,9 @@ namespace The_Gifters.Controllers
             else
                 participateVM.IsRefundable = false;
 
-			await participatesService.AddParticipation(participateVM);
-			return RedirectToAction("MyParticipations", "Participations");
+            await participatesService.AddParticipation(participateVM);
+            return RedirectToAction("MyParticipations", "Participations");
 
-		}
-	}
+        }
+    }
 }
