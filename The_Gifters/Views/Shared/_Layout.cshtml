@@ -123,29 +123,8 @@
 			<div class="team-wrapper banner">
 				<div data-w-id="cd727261-1e66-100d-6138-dcbaeebc6761" class="intro wide no-margin-bottom">
 					<div class="text-label image-banner">Bold steps towards a better world</div>
-					<p class="sign-in-an-register-container-egen">
-						<form asp-controller="user" asp-action="login">
-							@*<label asp-for="Email"></label>
-							<input asp-for="Email" />
-							<span asp-validation-for="Ekmail"></span>*@
-
-							<label class="sign-in-and-register-label-egen" asp-for="Username"></label>
-							<input class="sign-in-and-register-input-egen" asp-for="Username" />
-							<span asp-validation-for="Username"></span>
-
-							<label class="sign-in-and-register-label-egen" asp-for="Password"></label>
-							<input class="sign-in-and-register-input-egen" asp-for="Password" />
-							<span asp-validation-for="Password"></span>
-							<br />
-							<input class="button-egen" type="submit" value="Login" />
-						</form>
-						<div asp-validation-summary=All></div>
-
-					</p>
-					@*<a class="button w-inline-block" asp-controller="Users" asp-action="Create">
-
-					<div class="text-block-10">I want to participate</div>*@
-					@*</a>*@
+					@RenderBody()
+					
 				</div>
 			</div>
 
