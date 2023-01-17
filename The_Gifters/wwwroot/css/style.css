@@ -2389,7 +2389,7 @@ figcaption {
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
-	max-width: 580px;
+	/*max-width: 580px;*/
 	margin-right: auto;
 	margin-bottom: 80px;
 	margin-left: auto;
