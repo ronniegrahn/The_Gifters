@@ -4,7 +4,6 @@
     {
         public string OrganizationName { get; set; }
         public string OrganizationDescription { get; set; }
-        public double ContributionAmount { get; set; }
         public DateTime ParticipationDate { get; set; }
         public DateTime? ParticipationEndDate { get; set; }
         public double ParticipationAmount { get; internal set; }
