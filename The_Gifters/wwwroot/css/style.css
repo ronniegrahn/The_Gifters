@@ -2830,6 +2830,7 @@ sök
 	line-height: 40px;
 	padding-top: 40px;
 }
+
 .sign-in-and-register-input-egen {
 	margin-botton: 70px;
 	width: 350px;
@@ -2839,103 +2840,102 @@ sök
 	font-size: 16px;
 	color: black;
 	background-color: rgba(255, 255, 255, 0.7);
-	border-style:none;
-	
+	border-style: none;
 }
 
 .button:hover {
 	background-color: #c08657;
 }
 
-	.button.w--current {
-		display: block;
+.button.w--current {
+	display: block;
+}
+
+.button.white {
+	background-color: #fff;
+	color: #151515;
+}
+
+	.button.white:hover {
+		background-color: #ff7b3e;
+		color: #fff;
 	}
 
-	.button.white {
+.button.ghost {
+	background-color: transparent;
+	box-shadow: inset 0 0 0 1px hsla(0, 0%, 100%, 0.5);
+}
+
+	.button.ghost:hover {
 		background-color: #fff;
+		box-shadow: inset 0 0 0 1px transparent;
 		color: #151515;
 	}
 
-		.button.white:hover {
-			background-color: #ff7b3e;
-			color: #fff;
-		}
+.button.color-1 {
+	background-color: #ff7b3e;
+}
 
-	.button.ghost {
-		background-color: transparent;
-		box-shadow: inset 0 0 0 1px hsla(0, 0%, 100%, 0.5);
+.button.margin-left {
+	margin-left: 16px;
+}
+
+.button.small {
+	height: 40px;
+	padding-right: 18px;
+	padding-left: 20px;
+	font-size: 12px;
+	line-height: 16px;
+}
+
+.button.send-icon-button {
+	width: 48px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-right: 24px;
+	padding-left: 24px;
+	-webkit-box-flex: 0;
+	-webkit-flex: 0 0 auto;
+	-ms-flex: 0 0 auto;
+	flex: 0 0 auto;
+	border-radius: 0px;
+	background-image: url("https://uploads-ssl.webflow.com/617871f8849a56fd144246a9/617871f9849a561f454246f0_paperplane-icon-white.svg");
+	background-position: 13px 50%;
+	background-size: 24px;
+	background-repeat: no-repeat;
+}
+
+.button.hero-v4-left {
+	left: 40px;
+	top: auto;
+	right: auto;
+	bottom: 40px;
+	width: 230px;
+	background-color: transparent;
+	box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.5);
+}
+
+	.button.hero-v4-left:hover {
+		background-color: #fff;
+		box-shadow: inset 0 0 0 1px hsla(0, 0%, 100%, 0);
+		color: #151515;
 	}
 
-		.button.ghost:hover {
-			background-color: #fff;
-			box-shadow: inset 0 0 0 1px transparent;
-			color: #151515;
-		}
+.button.hero-v4-right {
+	left: auto;
+	top: auto;
+	right: 40px;
+	bottom: 40px;
+	width: 230px;
+	background-color: transparent;
+	box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.5);
+}
 
-	.button.color-1 {
-		background-color: #ff7b3e;
+	.button.hero-v4-right:hover {
+		background-color: #fff;
+		box-shadow: inset 0 0 0 1px hsla(0, 0%, 100%, 0);
+		color: #151515;
 	}
-
-	.button.margin-left {
-		margin-left: 16px;
-	}
-
-	.button.small {
-		height: 40px;
-		padding-right: 18px;
-		padding-left: 20px;
-		font-size: 12px;
-		line-height: 16px;
-	}
-
-	.button.send-icon-button {
-		width: 48px;
-		margin-top: 0px;
-		margin-bottom: 0px;
-		padding-right: 24px;
-		padding-left: 24px;
-		-webkit-box-flex: 0;
-		-webkit-flex: 0 0 auto;
-		-ms-flex: 0 0 auto;
-		flex: 0 0 auto;
-		border-radius: 0px;
-		background-image: url("https://uploads-ssl.webflow.com/617871f8849a56fd144246a9/617871f9849a561f454246f0_paperplane-icon-white.svg");
-		background-position: 13px 50%;
-		background-size: 24px;
-		background-repeat: no-repeat;
-	}
-
-	.button.hero-v4-left {
-		left: 40px;
-		top: auto;
-		right: auto;
-		bottom: 40px;
-		width: 230px;
-		background-color: transparent;
-		box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.5);
-	}
-
-		.button.hero-v4-left:hover {
-			background-color: #fff;
-			box-shadow: inset 0 0 0 1px hsla(0, 0%, 100%, 0);
-			color: #151515;
-		}
-
-	.button.hero-v4-right {
-		left: auto;
-		top: auto;
-		right: 40px;
-		bottom: 40px;
-		width: 230px;
-		background-color: transparent;
-		box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.5);
-	}
-
-		.button.hero-v4-right:hover {
-			background-color: #fff;
-			box-shadow: inset 0 0 0 1px hsla(0, 0%, 100%, 0);
-			color: #151515;
-		}
 
 .sg-button-block {
 	display: -webkit-box;
@@ -3181,7 +3181,7 @@ sök
 	}
 
 .nav-bar {
-	/*position: fixed;*/
+	position: fixed;
 	left: 0px;
 	top: 0px;
 	right: 0px;
@@ -12978,7 +12978,7 @@ sök
 		width: 100px;
 	}
 
-	.heading {
+/*	.heading {
 		margin-bottom: 14px;
 		font-size: 34px;
 		line-height: 40px;
@@ -13037,9 +13037,9 @@ sök
 
 	.body {
 		overflow: visible;
-	}
+	}*/
 
-	.founder-name {
+/*	.founder-name {
 		margin-bottom: 9px;
 		font-size: 14px;
 		line-height: 16px;
@@ -13059,9 +13059,9 @@ sök
 	.footer-link-type {
 		font-size: 8px;
 	}
-}
+}*/
 
-#w-node-_293885f3-cd29-6dde-fafe-15ee80c4797c-364246b2 {
+/*#w-node-_293885f3-cd29-6dde-fafe-15ee80c4797c-364246b2 {
 	-ms-grid-row: span 1;
 	grid-row-start: span 1;
 	-ms-grid-row-span: 1;
@@ -13591,9 +13591,9 @@ sök
 	grid-column-start: 2;
 	-ms-grid-column-span: 10;
 	grid-column-end: 12;
-}
+}*/
 
-@media screen and (max-width: 991px) {
+/*@media screen and (max-width: 991px) {
 	#w-node-_293885f3-cd29-6dde-fafe-15ee80c4797c-364246b2 {
 		-ms-grid-column-span: 6;
 		grid-column-end: 8;
@@ -13918,9 +13918,9 @@ sök
 		-ms-grid-column-span: 8;
 		grid-column-end: 9;
 	}
-}
+}*/
 
-@media screen and (max-width: 767px) {
+/*@media screen and (max-width: 767px) {
 	#w-node-_293885f3-cd29-6dde-fafe-15ee80c4797c-364246b2 {
 		-ms-grid-column: span 8;
 		grid-column-start: span 8;
@@ -14353,4 +14353,6 @@ sök
 		-ms-grid-row-span: 1;
 		grid-row-end: span 1;
 	}
-}
+	}
+*/
+
