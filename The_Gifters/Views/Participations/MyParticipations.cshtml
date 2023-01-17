@@ -6,28 +6,28 @@
 @Html.Partial("_LoggedInMenu")
 @Html.Partial("_Logo")
 
-<input class="button-egen" type="submit" value="Participate" />
-
-<h4>Your active contributions</h4>
-
-@foreach (var item in Model.Participations)
-{
-
-    <div class="active-participations">
-        
-        <h4 class="panel-title">
-            <a asp-controller="Participations" asp-action="Details" asp-route-id="@item.ParticipationId">@item.ParticipationAmount SEK</a>
-                
-        </h4>
-        
-        <i>
-            <p class="participationamount"> @item.OrganizationName</p>
-        </i>
-        
-        <p class="panel-title">@item.OrganizationDescription</p>
-        
-    </div>
-}
-
-<p>You have generated <i>@Model.RunningTotal</i> SEK in contributions to your chosen organizations. Thank you for your help!</p>
-<p>Together, Give For Life participants have contributed 100 000 SEK to different organizations.</p>
+<input class="my-participations-button" type="submit" value="Participate" />
+<div class="my-participations-wrapper">
+	<div class="active-participations">
+		<h3>Your active contributions</h3>
+		@foreach (var item in Model.Participations)
+		{
+			<div class="active-participations-item">
+				<p>
+					You are seeding @item.ParticipationAmount SEK to the<a asp-controller="Participations" asp-action="Details" asp-route-id="@item.ParticipationId"> @item.OrganizationName</a>
+					<br /><i><font size="2">The participation has contributed @item.ContributionAmount SEK</font></i>
+				</p>
+			</div>
+		}
+	</div>
+	<div class="generted-wrapper">
+	<div class="user-have-generated">
+		<h3>You have generated</h3>
+		<p>You have generated <i>@Model.RunningTotal</i> SEK in contributions to your chosen organizations. Thank you for your help!</p>
+	</div>
+	<div class="we-have-generated">
+		<h3>We have generated</h3>
+		<p>Together, Give For Life participants have contributed 100 000 SEK to different organizations.</p>
+	</div>
+	</div>
+</div>
