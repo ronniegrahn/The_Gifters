@@ -9,15 +9,15 @@
 							
 							<label class="sign-in-and-register-label-egen" asp-for="Username"></label>
 							<input class="sign-in-and-register-input-egen" asp-for="Username" />
-							<span asp-validation-for="Username"></span>
+							<div><span asp-validation-for="Username"></span></div>
 
 							<label class="sign-in-and-register-label-egen" asp-for="Password"></label>
 							<input class="sign-in-and-register-input-egen" asp-for="Password" />
-							<span asp-validation-for="Password"></span>
+		<div><span asp-validation-for="Password"></span></div>
 							<br />
 							<input class="button-egen" type="submit" value="Login" />
 						</form>
-						<div asp-validation-summary=All></div>
+						<div class="validation" asp-validation-summary=All></div>
 						
 					</p>
 				

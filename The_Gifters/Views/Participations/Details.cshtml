@@ -1,6 +1,6 @@
 ﻿@model DetailsVM
 @{
-    ViewData["Title"] = "Details";
+	ViewData["Title"] = "Details";
 }
 
 
@@ -8,16 +8,25 @@
 <partial name="_LoggedInMenu" />
 <partial name="_Logo" />
 
+<div>
+	<h4>
+		This is the detailed view of your participation to @Model.OrganizationName
+	</h4>
 
+	<p>
+		You started participating @Model.ParticipationDate.ToShortDateString()
+		<br />
+		Your participation amount: @Model.ParticipationAmount SEK
+		<br />
+		Your participation has generated @Model.ParticipationSumGenerated SEK
+		<br />
+		Your participation can be refunded from @Model.ParticipationEndDate?.ToShortDateString()
+	</p>
+	<br />
+	<br />
+	<input type="submit" value="Convert to donation" />
+	<br />
+	<br />
+	<input type="submit" value="Refund" />
+</div>
 
-<h4>My Participations</h4>
-
-
-
-<p>@Model.ParticipationDate.ToShortDateString(): <br /> @Model.ParticipationAmount SEK</p>
-
-
-
-
-<input type="submit" value="Convert to donation" />
-<input type="submit" value="Refund" />
