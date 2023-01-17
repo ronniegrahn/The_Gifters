@@ -5,7 +5,7 @@ namespace The_Gifters.Views.Users
 	public class CreateVM
 	{
 		[Required(ErrorMessage = "Enter a first name")]
-		public string FirstName { get; set; }
+		public string FirstName { get; set; } = "First name";
 
 		[Required(ErrorMessage = "Enter a last name")]
 		public string LastName { get; set; }

@@ -6,34 +6,39 @@
 
 <a asp-controller="Users" asp-action="Index">Go back</a>
 <a asp-controller="Users" asp-action="Login">
-	<input type="button" value="Login" />
+	<input class="button-egen" type="button" value="Login" />
 </a>
 
 @Html.Partial("_Logo")
-
+@*<div class="login-wrapper">*@
 <form asp-controller="user" asp-action="login">
-	<label asp-for="FirstName"></label>
-	<input asp-for="FirstName" />
+	<label class="sign-in-and-register-label-egen" asp-for="FirstName"></label>
+	<input class="create-input-egen" asp-for="FirstName" />
 	<span asp-validation-for="FirstName"></span>
+	<br />
 
-	<label asp-for="LastName"></label>
-	<input asp-for="LastName" />
+	<label class="sign-in-and-register-label-egen" asp-for="LastName"></label>
+	<input class="create-input-egen" asp-for="LastName" />
 	<span asp-validation-for="LastName"></span>
+	<br />
 
-	<label asp-for="Email"></label>
-	<input asp-for="Email" />
+	<label class="sign-in-and-register-label-egen" asp-for="Email"></label>
+	<input class="create-input-egen" asp-for="Email" />
 	<span asp-validation-for="Email"></span>
+	<br />
 
-	<label asp-for="PhoneNumber"></label>
-	<input asp-for="PhoneNumber"/>
+	<label class="sign-in-and-register-label-egen" asp-for="PhoneNumber"></label>
+	<input class="create-input-egen" asp-for="PhoneNumber" />
 	<span asp-validation-for="PhoneNumber"></span>
+	<br />
 
-	<label asp-for="Password"></label>
-	<input asp-for="Password" />
+	<label class="sign-in-and-register-label-egen" asp-for="Password"></label>
+	<input class="create-input-egen" asp-for="Password" />
 	<span asp-validation-for="Password"></span>
+	<br />
 
-	<label asp-for="PasswordRepeat"></label>
-	<input asp-for="PasswordRepeat" />
+	<label class="sign-in-and-register-label-egen" asp-for="PasswordRepeat"></label>
+	<input class="create-input-egen" asp-for="PasswordRepeat" />
 	<span asp-validation-for="PasswordRepeat"></span>
 
 	<p>
@@ -41,6 +46,7 @@
 		<span asp-validation-for="AcceptTerms"></span>
 		I Accept terms and agreements
 	</p>
-	<input type="submit" value="Create account" />
+	<input class="button-egen" type="submit" value="Create account" />
 </form>
+@*</div>*@
 <div asp-validation-summary=All></div>

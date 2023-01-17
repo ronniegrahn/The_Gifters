@@ -6,7 +6,7 @@
 @Html.Partial("_LoggedInMenu")
 @Html.Partial("_Logo")
 
-<input type="submit" value="Participate" />
+<input class="button-egen" type="submit" value="Participate" />
 
 <h4>Your active contributions</h4>
 
@@ -15,13 +15,13 @@
 
     <div class="active-participations">
         
-        <h3 class="panel-title">
-            <a asp-controller="Participations" asp-action="Details" asp-route-id="@item.ParticipationId"> @item.OrganizationName</a>
+        <h4 class="panel-title">
+            <a asp-controller="Participations" asp-action="Details" asp-route-id="@item.ParticipationId">@item.ParticipationAmount SEK</a>
                 
-        </h3>
+        </h4>
         
         <i>
-            <p class="participationamount">Participation @item.ParticipationAmount SEK</p>
+            <p class="participationamount"> @item.OrganizationName</p>
         </i>
         
         <p class="panel-title">@item.OrganizationDescription</p>
