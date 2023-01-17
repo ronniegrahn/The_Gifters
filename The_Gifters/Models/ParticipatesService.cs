@@ -59,6 +59,8 @@ namespace The_Gifters.Models
                 TimeFrame = timeFrame,
                 ParticipationEndDate = participationEndDate,
                 CustomerId = customerId, //Måste ändras till en variabel när användare är på plats
+                IsRefundable = (timeFrame != null) ? true: false,
+                IsActive= true,
             });
 
             await giftersContext.SaveChangesAsync();

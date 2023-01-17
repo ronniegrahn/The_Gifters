@@ -17,6 +17,10 @@ public partial class Participation
 
     public decimal? SumGenerated { get; set; }
 
+    public bool IsRefundable { get; set; }
+
+    public bool IsActive { get; set; }
+
     public int OrganizationId { get; set; }
 
     public int CustomerId { get; set; }
