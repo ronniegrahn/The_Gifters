@@ -8,11 +8,11 @@
 <partial name="_LoggedInMenu" />
 <partial name="_Logo" />
 
-<h4>
-	This is the detailed view of your participation to @Model.OrganizationName
-</h4>
-
 <div>
+	<h4>
+		This is the detailed view of your participation to @Model.OrganizationName
+	</h4>
+
 	<p>
 		You started participating @Model.ParticipationDate.ToShortDateString()
 		<br />
@@ -22,12 +22,11 @@
 		<br />
 		Your participation can be refunded from @Model.ParticipationEndDate?.ToShortDateString()
 	</p>
+	<br />
+	<br />
+	<input type="submit" value="Convert to donation" />
+	<br />
+	<br />
+	<input type="submit" value="Refund" />
 </div>
 
-
-<br />
-<br />
-<input type="submit" value="Convert to donation" />
-<br />
-<br />
-<input type="submit" value="Refund" />
