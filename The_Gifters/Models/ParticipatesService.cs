@@ -135,6 +135,8 @@ namespace The_Gifters.Models
                 OrganizationName = giftersContext.Organizations.First(x => x.Id == theParticipation.OrganizationId).OrganizationName,
                 OrganizationDescription = giftersContext.Organizations.First(x => x.Id == theParticipation.OrganizationId).Description,
                 ParticipationId = theParticipation.Id,
+				IsRefundable = theParticipation.IsRefundable,
+				IsActive = theParticipation.IsActive,
 			};
 
             return detailsVM;
