@@ -41,7 +41,7 @@ namespace The_Gifters.Controllers
             var model = new MyParticipationsVM()
             {
                 Participations = myParticipationsVM,
-                RunningTotal = myParticipationsVM.Sum(x => x.ParticipationAmount) * 0.05,
+                RunningTotal = Math.Round(myParticipationsVM.Sum(x => x.ContributionAmount)),
             };
             return View(model);
         }
