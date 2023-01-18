@@ -38,11 +38,13 @@ namespace The_Gifters.Controllers
         {
             var myParticipationsVM = await participatesService.GetMyParticipationsVMAsync();
 			var runningTotal = await participatesService.RunningTotal();
+            var testingStuff = myParticipationsVM.Sum(x => x.ParticipationAmount);
 
             var model = new MyParticipationsVM()
             {
                 Participations = myParticipationsVM,
-                RunningTotal = Math.Round(runningTotal),
+                RunningTotalUser = testingStuff,
+                RunningTotalAll = Math.Round(runningTotal),
             };
             return View(model);
         }
