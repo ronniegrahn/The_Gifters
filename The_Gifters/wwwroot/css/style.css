@@ -451,7 +451,7 @@ p {
 
 a {
 	color: #d79f72;
-	text-decoration: underline
+	/*text-decoration: underline*/
 }
 
 .section {
@@ -2216,7 +2216,7 @@ a {
 }
 
 	.text-link:hover {
-		text-decoration: underline
+		/*text-decoration: underline*/
 	}
 
 .nav-bar-v2 {
@@ -3934,7 +3934,7 @@ a {
 }
 
 	.text-link:hover {
-		text-decoration: underline
+		/*text-decoration: underline*/
 	}
 
 .nav-bar-v2 {
@@ -5849,4 +5849,3 @@ a {
 			line-height: 24px
 		}
 	}
-

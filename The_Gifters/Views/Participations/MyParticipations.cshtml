@@ -3,8 +3,9 @@
 @{
 	ViewData["Title"] = "My Contributions";
 }
-@Html.Partial("_LoggedInMenu")
-@Html.Partial("_Logo")
+<div class="top-menu-wrapper">
+@Html.Partial("_LoggedInMenu")	
+</div>
 
 <input class="my-participations-button" type="submit" value="Participate" />
 <div class="my-participations-wrapper">
