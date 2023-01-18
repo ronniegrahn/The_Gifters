@@ -60,8 +60,8 @@ namespace The_Gifters.Models
                 TimeFrame = timeFrame,
                 ParticipationEndDate = participationEndDate,
                 CustomerId = customerId, //Måste ändras till en variabel när användare är på plats
-                IsRefundable = (timeFrame != null) ? true: false,
-                IsActive= true,
+                IsRefundable = (timeFrame != null) ? true : false,
+                IsActive = true,
             });
 
             await giftersContext.SaveChangesAsync();
@@ -76,14 +76,14 @@ namespace The_Gifters.Models
 
             foreach (var organization in giftersContext.Organizations)
             {
-                organizationNames.Add( 
-					new SelectListItem { Value = organization.Id.ToString(), Text = organization.OrganizationName});
+                organizationNames.Add(
+                    new SelectListItem { Value = organization.Id.ToString(), Text = organization.OrganizationName });
             };
 
-			
+
 
             return organizationNames.ToArray();
-		}
+        }
 
         public async Task<List<ParticipationVM>> GetMyParticipationsVMAsync()
         {
@@ -92,7 +92,6 @@ namespace The_Gifters.Models
             int customerId = await GetCustomerIdAsync();
 
             List<ParticipationVM> participationVMs = new List<ParticipationVM>();
-
 
             var participations = giftersContext.Participations
                 .Where(p => p.CustomerId == customerId)
@@ -104,7 +103,7 @@ namespace The_Gifters.Models
                 {
                     ParticipationAmount = Convert.ToDouble(participation.Amount),
                     StartDate = participation.ParticipationDate,
-                    ContributionAmount = Convert.ToDouble(participation.SumGenerated),
+                    ContributionAmount = Math.Round(CalculateInterest(participation.ParticipationDate, DateTime.Now, Convert.ToDouble(participation.Amount), 0.05)),
                     OrganizationName = giftersContext.Organizations.First(x => x.Id == participation.OrganizationId).OrganizationName,
                     OrganizationDescription = giftersContext.Organizations.First(x => x.Id == participation.OrganizationId).Description,
                     ParticipationId = participation.Id,
@@ -132,39 +131,12 @@ namespace The_Gifters.Models
                 ParticipationAmount = Convert.ToDouble(theParticipation.Amount),
                 ParticipationEndDate = theParticipation.ParticipationEndDate,
                 ParticipationTimeFrame = theParticipation.TimeFrame,
-                ParticipationSumGenerated = Convert.ToDouble(theParticipation.SumGenerated),
+                ParticipationSumGenerated = Math.Round(CalculateInterest(theParticipation.ParticipationDate, DateTime.Now, Convert.ToDouble(theParticipation.Amount), 0.05)),
                 OrganizationName = giftersContext.Organizations.First(x => x.Id == theParticipation.OrganizationId).OrganizationName,
                 OrganizationDescription = giftersContext.Organizations.First(x => x.Id == theParticipation.OrganizationId).Description,
             };
 
             return detailsVM;
-
-            //var participations = giftersContext.Participations
-            //    .Where(p => p.CustomerId == customerId && p.Id == participationId)
-            //    .ToList();
-
-            //// List<DetailsVM> detailsVM = new List<DetailsVM>();
-
-            //var donationOrganisation = giftersContext.Participations
-            //    .Where(p => p.CustomerId == customerId)
-            //    .Join(giftersContext.Organizations, p => p.OrganizationId, o => o.Id, (p, o) => new { p, o })
-            //    .Where(x => x.o.OrganizationName == tempOrg)
-            //    .ToList();
-
-            //foreach (var item in donationOrganisation)
-            //{
-            //detailsVM.Add(new DetailsVM
-            //var detailsVM = new DetailsVM
-            //{
-            //    ParticipationDate = item.p.ParticipationDate,
-            //    ParticipationAmount = Convert.ToDouble(item.p.Amount),
-            //    ParticipationEndDate = item.p.ParticipationEndDate,
-            //    ParticipationTimeFrame = item.p.TimeFrame,
-            //    ParticipationSumGenerated = Convert.ToDouble(item.p.SumGenerated),
-            //    OrganizationName = item.o.OrganizationName,
-            //    OrganizationDescription = item.o.Description,
-            //};
-            //}
 
         }
         private async Task<int> GetCustomerIdAsync()
@@ -175,5 +147,15 @@ namespace The_Gifters.Models
 
             return customer.Id;
         }
+
+        private double CalculateInterest(DateTime startDate, DateTime endDate, double initialAmount, double interestRate)
+        {
+            TimeSpan difference = endDate - startDate;
+            double days = difference.TotalDays;
+            double years = days / 365.25;
+            double interest = initialAmount * interestRate * years;
+            return interest;
+        }
+
     }
 }
