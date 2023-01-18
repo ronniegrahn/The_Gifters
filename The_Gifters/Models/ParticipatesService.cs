@@ -109,7 +109,9 @@ namespace The_Gifters.Models
 				theRunningTotal += CalculateInterest(item.ParticipationDate, participationEndDate, Convert.ToDouble(item.Amount), 0.05);
 			}
 
-			return theRunningTotal;
+            var testing = Convert.ToDouble(runningTotal);
+            return testing;
+			//return theRunningTotal;
 		}
 
         public async Task<List<ParticipationVM>> GetMyParticipationsVMAsync()
