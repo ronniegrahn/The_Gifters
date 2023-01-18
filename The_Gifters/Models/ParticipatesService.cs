@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System.Reflection.Metadata.Ecma335;
@@ -34,8 +35,8 @@ namespace The_Gifters.Models
 
             int customerId = await GetCustomerIdAsync();
 
-            string organizationName = participateVM.OrganizationNames[0];
-            var organization = await giftersContext.Organizations.FirstAsync(x => x.OrganizationName.Equals(organizationName));
+            var organizationName = participateVM.SelectedOrganizationName;
+            var organization = await giftersContext.Organizations.FirstAsync(x => x.Id == organizationName);
 
 
 
@@ -67,19 +68,22 @@ namespace The_Gifters.Models
         }
 
 
-        public async Task<List<string>> GetOrganizationNamesAsync()
+        public async Task<SelectListItem[]> GetOrganizationNamesAsync()
         {
             await Task.Delay(0);
 
-            List<string> organizationNames = new List<string>();
+            var organizationNames = new List<SelectListItem>();
 
             foreach (var organization in giftersContext.Organizations)
             {
-                organizationNames.Add(organization.OrganizationName);
+                organizationNames.Add( 
+					new SelectListItem { Value = organization.Id.ToString(), Text = organization.OrganizationName});
             };
 
-            return organizationNames;
-        }
+			
+
+            return organizationNames.ToArray();
+		}
 
         public async Task<List<ParticipationVM>> GetMyParticipationsVMAsync()
         {
