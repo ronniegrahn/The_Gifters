@@ -62,7 +62,7 @@ namespace The_Gifters.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return RedirectToAction("participate", "Participations");
             }
 
             var buttonName = Request.Form["Refundable"].Count > 0 ? "Refundable" : "Donate";
