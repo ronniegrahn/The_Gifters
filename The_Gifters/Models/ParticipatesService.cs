@@ -38,8 +38,6 @@ namespace The_Gifters.Models
             var organizationName = participateVM.SelectedOrganizationName;
             var organization = await giftersContext.Organizations.FirstAsync(x => x.Id == organizationName);
 
-
-
             if (participateVM.IsRefundable)
             {
                 participationEndDate.Value.AddMonths(12);
@@ -50,7 +48,6 @@ namespace The_Gifters.Models
                 participationEndDate = null;
                 timeFrame = null;
             }
-
 
             await giftersContext.AddAsync(new Participation
             {
@@ -80,14 +77,11 @@ namespace The_Gifters.Models
                     new SelectListItem { Value = organization.Id.ToString(), Text = organization.OrganizationName });
             };
 
-
-
             return organizationNames.ToArray();
         }
 
 		public async Task<double> RunningTotal()
 		{
-
 			List<Participation> AllParticipations = new List<Participation>();
 
 			foreach (var item in giftersContext.Participations)
@@ -109,8 +103,6 @@ namespace The_Gifters.Models
 				theRunningTotal += CalculateInterest(item.ParticipationDate, participationEndDate, Convert.ToDouble(item.Amount), 0.05);
 			}
 
-            //var testing = Convert.ToDouble(runningTotal);
-            //return testing;
             return theRunningTotal;
         }
 
@@ -125,7 +117,6 @@ namespace The_Gifters.Models
             var participations = giftersContext.Participations
                 .Where(p => p.CustomerId == customerId)
                 .ToList();
-
 
             foreach (var participation in participations)
             {
@@ -154,7 +145,6 @@ namespace The_Gifters.Models
 
             var theParticipation = participations2.FirstOrDefault(x => x.Id == participationId);
 
-
             var detailsVM = new DetailsVM
             {
                 ParticipationDate = theParticipation.ParticipationDate,
@@ -167,8 +157,8 @@ namespace The_Gifters.Models
             };
 
             return detailsVM;
-
         }
+
         private async Task<int> GetCustomerIdAsync()
         {
             string userId = userManager.GetUserId(accessor.HttpContext.User);
@@ -186,6 +176,5 @@ namespace The_Gifters.Models
             double interest = initialAmount * interestRate * years;
             return interest;
         }
-
     }
 }
