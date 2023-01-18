@@ -3335,7 +3335,7 @@ sök
 	z-index: 0;
 	height: auto;
 	margin: auto;
-	background-image: url("../images/sproutbackground.jpeg"); /*Bakgrundsbild*/
+	background-image: url("../images/bgimage.jpeg"); /*Bakgrundsbild*/
 	background-position: 50% 85%;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -8953,7 +8953,7 @@ sök
 .h3 {
 	font-family: 'Source Serif Pro', sans-serif;
 	color: #1b1b1b;
-	font-size: 30px;
+	font-size: 25px;
 	line-height: 40px;
 }
 

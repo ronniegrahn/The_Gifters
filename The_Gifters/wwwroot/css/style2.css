@@ -55,10 +55,12 @@ input {
 }
 
 .intro.wide {
-    background-color: rgba(25,25,25, 0.7);
-    position: relative;
-    top: 50px;
-    /*align margin-top: 40px*/
+	border-radius: 20px;
+	box-shadow: 3px 5px rgba(25,25,25, 0.3);
+	background-color: rgba(25,25,25, 0.7);
+	position: relative;
+	top: 50px;
+	/*align margin-top: 40px*/
 }
 
 img {
@@ -539,7 +541,7 @@ nav, section { /*keep*/
     z-index: 0;
     height: auto;
     margin: auto;
-    background-image: url("../images/sproutbackground.jpeg"); /*Bakgrundsbild*/
+    background-image: url("../images/bgimage.jpeg"); /*Bakgrundsbild*/
     background-position: 50% 85%;
     background-size: cover;
     background-repeat: no-repeat;
