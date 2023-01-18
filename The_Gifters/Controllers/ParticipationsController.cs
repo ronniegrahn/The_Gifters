@@ -37,11 +37,12 @@ namespace The_Gifters.Controllers
         public async Task<IActionResult> MyParticipationsAsync()
         {
             var myParticipationsVM = await participatesService.GetMyParticipationsVMAsync();
+			var runningTotal = await participatesService.RunningTotal();
 
             var model = new MyParticipationsVM()
             {
                 Participations = myParticipationsVM,
-                RunningTotal = Math.Round(myParticipationsVM.Sum(x => x.ContributionAmount)),
+                RunningTotal = Math.Round(runningTotal),
             };
             return View(model);
         }

@@ -85,6 +85,33 @@ namespace The_Gifters.Models
             return organizationNames.ToArray();
         }
 
+		public async Task<double> RunningTotal()
+		{
+
+			List<Participation> AllParticipations = new List<Participation>();
+
+			foreach (var item in giftersContext.Participations)
+			{
+				AllParticipations.Add(item);
+			}
+
+			var runningTotal = AllParticipations.Sum(x => x.Amount);
+			double theRunningTotal = 0;
+
+			foreach (var item in AllParticipations)
+			{
+				DateTime? participationEndDate = DateTime.Now;
+				if (!item.IsActive)
+				{
+					participationEndDate = item.ParticipationEndDate;
+				}
+
+				theRunningTotal += CalculateInterest(item.ParticipationDate, participationEndDate, Convert.ToDouble(item.Amount), 0.05);
+			}
+
+			return theRunningTotal;
+		}
+
         public async Task<List<ParticipationVM>> GetMyParticipationsVMAsync()
         {
             await Task.Delay(0);
@@ -96,6 +123,7 @@ namespace The_Gifters.Models
             var participations = giftersContext.Participations
                 .Where(p => p.CustomerId == customerId)
                 .ToList();
+
 
             foreach (var participation in participations)
             {
@@ -148,10 +176,10 @@ namespace The_Gifters.Models
             return customer.Id;
         }
 
-        private double CalculateInterest(DateTime startDate, DateTime endDate, double initialAmount, double interestRate)
+        private double CalculateInterest(DateTime? startDate, DateTime? endDate, double initialAmount, double interestRate)
         {
-            TimeSpan difference = endDate - startDate;
-            double days = difference.TotalDays;
+            TimeSpan? difference = endDate - startDate;
+            double days = difference.Value.TotalDays;
             double years = days / 365.25;
             double interest = initialAmount * interestRate * years;
             return interest;
