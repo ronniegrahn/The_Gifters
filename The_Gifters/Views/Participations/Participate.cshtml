@@ -12,7 +12,6 @@
 	<label class ="sign-in-and-register-label-egen" asp-for="Amount"></label>
 	<input class="create-input-egen" asp-for="Amount" />
 	<span asp-validation-for="Amount"></span>
-
 	<label class="sign-in-and-register-label-egen" asp-for="OrganizationNames"></label>
 	<select id="drpEmpList" class="form-control" asp-for="OrganizationNames" asp-items="@(new SelectList(Model.OrganizationNames,  "Text"))">
 		<option value="">--Select--</option>
@@ -23,7 +22,16 @@
 	<br />
 	<input class="button-egen" type="submit" name="refundable" value="Refundable (12 months)"/>
 	<input class="button-egen" type="submit" name="donation" value="Donate (no refund)" />
-	<p>x SEK will generate approximately Y SEK in contributions per year.</p>
-	<p>x SEK will generate approximately Y SEK in contributions per year.</p>
+	<p id="output"></p>
 </form>
+
 <div asp-validation-summary=All></div>
+
+<script>
+	var output = document.getElementById("output");
+	var amount = document.getElementById("Amount");
+
+	amount.addEventListener("change", function () {
+		output.innerText = parseInt(amount.value) + " SEK will generate approximately " + parseInt(amount.value) * 0.05 + " SEK in contributions per year.";
+	});
+</script>
