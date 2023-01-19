@@ -20,13 +20,12 @@
 		<br />
 		Your participation has generated @Model.ParticipationSumGenerated SEK
 		<br />
-		Your participation can be refunded from @Model.ParticipationEndDate?.ToShortDateString()
-	</p>
+	<p>@(Model.IsRefundable ? "Your participation can be refunded from " + @Model.ParticipationEndDate?.ToShortDateString() : "Your participation has been refunded.")</p>
+	
 	<br />
 	<br />
 	<input class="button-egen" type="submit" value="Convert to donation" />
-
-	<p>The value of IsRefundable: @Model.IsRefundable</p>
+	
 	
 	<div id="refund" style="@(Model.IsRefundable ? "display" : "display:none")">
 		<form asp-controller="Participations" asp-action="DeleteParticipation" asp-route-id="@Model.ParticipationId">
