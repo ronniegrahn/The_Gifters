@@ -15,9 +15,9 @@ public partial class Customer
 
     public string? PhoneNumber { get; set; }
 
-    public string? AspNetUsersId { get; set; }
+    public string AspNetUsersId { get; set; } = null!;
 
-    public virtual AspNetUser? AspNetUsers { get; set; }
+    public virtual AspNetUser AspNetUsers { get; set; } = null!;
 
     public virtual ICollection<Participation> Participations { get; } = new List<Participation>();
 }

@@ -38,8 +38,6 @@ namespace The_Gifters.Models
             var organizationName = participateVM.SelectedOrganizationName;
             var organization = await giftersContext.Organizations.FirstAsync(x => x.Id == organizationName);
 
-
-
             if (participateVM.IsRefundable)
             {
                 participationEndDate.Value.AddMonths(12);
@@ -50,7 +48,6 @@ namespace The_Gifters.Models
                 participationEndDate = null;
                 timeFrame = null;
             }
-
 
             await giftersContext.AddAsync(new Participation
             {
@@ -80,14 +77,11 @@ namespace The_Gifters.Models
                     new SelectListItem { Value = organization.Id.ToString(), Text = organization.OrganizationName });
             };
 
-
-
             return organizationNames.ToArray();
         }
 
 		public async Task<double> RunningTotal()
 		{
-
 			List<Participation> AllParticipations = new List<Participation>();
 
 			foreach (var item in giftersContext.Participations)
@@ -95,7 +89,6 @@ namespace The_Gifters.Models
 				AllParticipations.Add(item);
 			}
 
-			var runningTotal = AllParticipations.Sum(x => x.Amount);
 			double theRunningTotal = 0;
 
 			foreach (var item in AllParticipations)
@@ -109,8 +102,8 @@ namespace The_Gifters.Models
 				theRunningTotal += CalculateInterest(item.ParticipationDate, participationEndDate, Convert.ToDouble(item.Amount), 0.05);
 			}
 
-			return theRunningTotal;
-		}
+            return theRunningTotal;
+        }
 
         public async Task<List<ParticipationVM>> GetMyParticipationsVMAsync()
         {
@@ -124,20 +117,25 @@ namespace The_Gifters.Models
                 .Where(p => p.CustomerId == customerId)
                 .ToList();
 
-
-            foreach (var participation in participations)
-            {
-                participationVMs.Add(new ParticipationVM
-                {
-                    ParticipationAmount = Convert.ToDouble(participation.Amount),
-                    StartDate = participation.ParticipationDate,
-                    ContributionAmount = Math.Round(CalculateInterest(participation.ParticipationDate, DateTime.Now, Convert.ToDouble(participation.Amount), 0.05)),
-                    OrganizationName = giftersContext.Organizations.First(x => x.Id == participation.OrganizationId).OrganizationName,
-                    OrganizationDescription = giftersContext.Organizations.First(x => x.Id == participation.OrganizationId).Description,
-                    ParticipationId = participation.Id,
-                });
-            }
-            return participationVMs;
+			foreach (var participation in participations)
+			{
+				DateTime? participationEndDate = DateTime.Now;
+				if (!participation.IsActive)
+				{
+					participationEndDate = participation.ParticipationEndDate;
+				}
+				participationVMs.Add(new ParticipationVM
+				{
+					ParticipationAmount = Convert.ToDouble(participation.Amount),
+					StartDate = participation.ParticipationDate,
+					ContributionAmount = Math.Round(CalculateInterest(participation.ParticipationDate, participationEndDate, Convert.ToDouble(participation.Amount), 0.05)),
+					OrganizationName = giftersContext.Organizations.First(x => x.Id == participation.OrganizationId).OrganizationName,
+					OrganizationDescription = giftersContext.Organizations.First(x => x.Id == participation.OrganizationId).Description,
+					ParticipationId = participation.Id,
+				});
+			}
+            participationVMs.Reverse();
+			return participationVMs;
         }
 
         public async Task<DetailsVM> GetDetailsAsync(int participationId)
@@ -151,7 +149,6 @@ namespace The_Gifters.Models
                 .ToListAsync();
 
             var theParticipation = participations2.FirstOrDefault(x => x.Id == participationId);
-
 
             var detailsVM = new DetailsVM
             {
@@ -168,8 +165,8 @@ namespace The_Gifters.Models
 			};
 
             return detailsVM;
-
         }
+
         private async Task<int> GetCustomerIdAsync()
         {
             string userId = userManager.GetUserId(accessor.HttpContext.User);
@@ -188,6 +185,9 @@ namespace The_Gifters.Models
             return interest;
         }
 
+    }
+
+
 		internal Task DeleteParticipation(int id)
 		{
 			var participation = giftersContext.Participations.First(x => x.Id == id);
@@ -199,4 +199,5 @@ namespace The_Gifters.Models
 			return Task.CompletedTask;
 		}
 	}
+
 }

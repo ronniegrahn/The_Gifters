@@ -5,7 +5,8 @@ namespace The_Gifters.Views.Participations
 	public class MyParticipationsVM
 	{
 		public List<ParticipationVM> Participations { get; set; }
-		public double RunningTotal { get; set; }
+		public double RunningTotalAll { get; set; }
+		public double RunningTotalUser { get; set; }
 	}
 
 	public class ParticipationVM
@@ -18,4 +19,3 @@ namespace The_Gifters.Views.Participations
 		public int ParticipationId { get; set; }
 	}
 }
-
