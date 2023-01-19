@@ -184,20 +184,16 @@ namespace The_Gifters.Models
             double interest = initialAmount * interestRate * years;
             return interest;
         }
-
-    }
-
-
-		internal Task DeleteParticipation(int id)
+		public async Task DeleteParticipation(int id)
 		{
-			var participation = giftersContext.Participations.First(x => x.Id == id);
-			participation.IsActive = false;
-            participation.IsRefundable = false;
-            
-			giftersContext.SaveChanges();
+			//DateTime dateTime = DateTime.Now;
 
-			return Task.CompletedTask;
+			Participation participation = await giftersContext.Participations.FirstAsync(x => x.Id == id);
+			participation.IsActive = false;
+			participation.IsRefundable = false;
+			participation.ParticipationEndDate = DateTime.Now;
+
+			giftersContext.SaveChangesAsync();
 		}
 	}
-
 }
