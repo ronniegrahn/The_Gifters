@@ -3,45 +3,42 @@
 @{
 	ViewBag.Title = "Create";
 }
-@Html.Partial("_LoggedInMenu")
+@Html.Partial("_LoggedOutMenu")
 
-<a asp-controller="Users" asp-action="Index">Go back</a>
-<a asp-controller="Users" asp-action="Login">
-	<input class="button-egen" type="button" value="Login" />
-</a>
-
-@Html.Partial("_Logo")
-@*<div class="login-wrapper">*@
 <form asp-controller="user" asp-action="login">
 	<label class="sign-in-and-register-label-egen" asp-for="FirstName">first name</label>
 	<input class="create-input-egen" asp-for="FirstName" />
+	<div>
 	<span asp-validation-for="FirstName"></span>
-	<br />
+	</div>
 
 	<label class="sign-in-and-register-label-egen" asp-for="LastName">last name</label>
 	<input class="create-input-egen" asp-for="LastName" />
+	<div>
 	<span asp-validation-for="LastName"></span>
-	<br />
+	</div>
 
 	<label class="sign-in-and-register-label-egen" asp-for="Email">e-mail</label>
 	<input class="create-input-egen" asp-for="Email" />
+	<div>
 	<span asp-validation-for="Email"></span>
-	<br />
+	</div>
 
 	<label class="sign-in-and-register-label-egen" asp-for="PhoneNumber">phone number</label>
 	<input class="create-input-egen" asp-for="PhoneNumber" />
+	<div>
 	<span asp-validation-for="PhoneNumber"></span>
-	<br />
+	</div>
 
 	<label class="sign-in-and-register-label-egen" asp-for="Password">password</label>
 	<input class="create-input-egen" asp-for="Password" />
+	<div>
 	<span asp-validation-for="Password"></span>
-	<br />
+	</div>
 
 	<label class="sign-in-and-register-label-egen" asp-for="PasswordRepeat">repeat password</label>
 	<input class="create-input-egen" asp-for="PasswordRepeat" />
-	<span asp-validation-for="PasswordRepeat"></span>
-	<br />
+	<div><span asp-validation-for="PasswordRepeat"></span></div>
 
 	<p style="display:none">
 		<input type="checkbox" asp-for="AcceptTerms" />
@@ -50,5 +47,6 @@
 	</p>
 	<input class="button-egen" type="submit" value="Create account" />
 </form>
-@*</div>*@
-<div asp-validation-summary=All></div>
+<br/>
+<br/>
+<br/>
