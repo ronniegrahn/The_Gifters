@@ -3,6 +3,7 @@
 @{
 	ViewBag.Title = "Create";
 }
+@Html.Partial("_LoggedInMenu")
 
 <a asp-controller="Users" asp-action="Index">Go back</a>
 <a asp-controller="Users" asp-action="Login">
@@ -12,32 +13,32 @@
 @Html.Partial("_Logo")
 @*<div class="login-wrapper">*@
 <form asp-controller="user" asp-action="login">
-	<label class="sign-in-and-register-label-egen" asp-for="FirstName"></label>
+	<label class="sign-in-and-register-label-egen" asp-for="FirstName">first name</label>
 	<input class="create-input-egen" asp-for="FirstName" />
 	<span asp-validation-for="FirstName"></span>
 	<br />
 
-	<label class="sign-in-and-register-label-egen" asp-for="LastName"></label>
+	<label class="sign-in-and-register-label-egen" asp-for="LastName">last name</label>
 	<input class="create-input-egen" asp-for="LastName" />
 	<span asp-validation-for="LastName"></span>
 	<br />
 
-	<label class="sign-in-and-register-label-egen" asp-for="Email"></label>
+	<label class="sign-in-and-register-label-egen" asp-for="Email">e-mail</label>
 	<input class="create-input-egen" asp-for="Email" />
 	<span asp-validation-for="Email"></span>
 	<br />
 
-	<label class="sign-in-and-register-label-egen" asp-for="PhoneNumber"></label>
+	<label class="sign-in-and-register-label-egen" asp-for="PhoneNumber">phone number</label>
 	<input class="create-input-egen" asp-for="PhoneNumber" />
 	<span asp-validation-for="PhoneNumber"></span>
 	<br />
 
-	<label class="sign-in-and-register-label-egen" asp-for="Password"></label>
+	<label class="sign-in-and-register-label-egen" asp-for="Password">password</label>
 	<input class="create-input-egen" asp-for="Password" />
 	<span asp-validation-for="Password"></span>
 	<br />
 
-	<label class="sign-in-and-register-label-egen" asp-for="PasswordRepeat"></label>
+	<label class="sign-in-and-register-label-egen" asp-for="PasswordRepeat">repeat password</label>
 	<input class="create-input-egen" asp-for="PasswordRepeat" />
 	<span asp-validation-for="PasswordRepeat"></span>
 	<br />
