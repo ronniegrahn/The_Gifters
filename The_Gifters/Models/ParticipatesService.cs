@@ -89,7 +89,6 @@ namespace The_Gifters.Models
 				AllParticipations.Add(item);
 			}
 
-			var runningTotal = AllParticipations.Sum(x => x.Amount);
 			double theRunningTotal = 0;
 
 			foreach (var item in AllParticipations)
@@ -118,19 +117,24 @@ namespace The_Gifters.Models
                 .Where(p => p.CustomerId == customerId)
                 .ToList();
 
-            foreach (var participation in participations)
-            {
-                participationVMs.Add(new ParticipationVM
-                {
-                    ParticipationAmount = Convert.ToDouble(participation.Amount),
-                    StartDate = participation.ParticipationDate,
-                    ContributionAmount = Math.Round(CalculateInterest(participation.ParticipationDate, DateTime.Now, Convert.ToDouble(participation.Amount), 0.05)),
-                    OrganizationName = giftersContext.Organizations.First(x => x.Id == participation.OrganizationId).OrganizationName,
-                    OrganizationDescription = giftersContext.Organizations.First(x => x.Id == participation.OrganizationId).Description,
-                    ParticipationId = participation.Id,
-                });
-            }
-            return participationVMs;
+			foreach (var participation in participations)
+			{
+				DateTime? participationEndDate = DateTime.Now;
+				if (!participation.IsActive)
+				{
+					participationEndDate = participation.ParticipationEndDate;
+				}
+				participationVMs.Add(new ParticipationVM
+				{
+					ParticipationAmount = Convert.ToDouble(participation.Amount),
+					StartDate = participation.ParticipationDate,
+					ContributionAmount = Math.Round(CalculateInterest(participation.ParticipationDate, participationEndDate, Convert.ToDouble(participation.Amount), 0.05)),
+					OrganizationName = giftersContext.Organizations.First(x => x.Id == participation.OrganizationId).OrganizationName,
+					OrganizationDescription = giftersContext.Organizations.First(x => x.Id == participation.OrganizationId).Description,
+					ParticipationId = participation.Id,
+				});
+			}
+			return participationVMs;
         }
 
         public async Task<DetailsVM> GetDetailsAsync(int participationId)

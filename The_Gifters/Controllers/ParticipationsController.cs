@@ -38,7 +38,7 @@ namespace The_Gifters.Controllers
         {
             var myParticipationsVM = await participatesService.GetMyParticipationsVMAsync();
 			var runningTotalAll = await participatesService.RunningTotal();
-            var runningTotalUser = myParticipationsVM.Sum(x => x.ParticipationAmount);
+            var runningTotalUser = myParticipationsVM.Sum(x => x.ContributionAmount);
 
             var model = new MyParticipationsVM()
             {
