@@ -6,7 +6,7 @@
 @Html.Partial("_LoggedInMenu")
 @Html.Partial("_Logo")
 
-<input class="my-participations-button" type="submit" value="Participate" />
+<a class="my-participations-button"  asp-controller="Participations" asp-action="Participate">Participate</a>
 <div class="my-participations-wrapper">
 	<div class="active-participations">
 		<h3>Your active contributions</h3>

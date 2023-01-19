@@ -15,7 +15,7 @@
 </head>
 
 <body class="body">
-    <div class="preloader">
+	@* <div class="preloader">
         <div class="loading-icon" data-w-id="32b9fc5e-45af-fa43-6fcc-d276e86062f0" data-animation-type="lottie"
              data-src="https://uploads-ssl.webflow.com/617871f8849a56fd144246a9/617871f9849a5677ba424811_preloader.json"
              data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg"
@@ -39,13 +39,15 @@
             <div class="nav-bar-info">
                 <a class="button ghost small w-button" asp-controller="Users" asp-action="Create">Create user</a>
             </div>
-        </div>
+		</div>
     </div>
     <div class="page-wrapper">
         <div id="Hero" class="hero-v3-section wf-section">
             <div class="team-wrapper banner">
-                <div class="intro wide">
-                    @RenderBody()
+                <div class="intro wide">*@
+
+					@RenderBody()
+
                 </div>
             </div>
                  <div class="bg-image">
