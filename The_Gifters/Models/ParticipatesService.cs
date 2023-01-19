@@ -186,14 +186,12 @@ namespace The_Gifters.Models
         }
 		public async Task DeleteParticipation(int id)
 		{
-			//DateTime dateTime = DateTime.Now;
-
 			Participation participation = await giftersContext.Participations.FirstAsync(x => x.Id == id);
 			participation.IsActive = false;
 			participation.IsRefundable = false;
 			participation.ParticipationEndDate = DateTime.Now;
 
-			giftersContext.SaveChangesAsync();
+			await giftersContext.SaveChangesAsync();
 		}
 	}
 }
