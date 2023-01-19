@@ -134,6 +134,7 @@ namespace The_Gifters.Models
 					ParticipationId = participation.Id,
 				});
 			}
+            participationVMs.Reverse();
 			return participationVMs;
         }
 

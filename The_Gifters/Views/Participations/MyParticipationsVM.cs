@@ -19,4 +19,3 @@ namespace The_Gifters.Views.Participations
 		public int ParticipationId { get; set; }
 	}
 }
-
