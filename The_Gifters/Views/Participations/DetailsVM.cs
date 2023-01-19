@@ -10,5 +10,7 @@
         public int? ParticipationTimeFrame { get; internal set; }
         public double ParticipationSumGenerated { get; internal set; }
         public bool IsRefundable { get; set; }
-    }
+        public bool IsActive { get; set; }
+        public int ParticipationId { get; set; }
+	}
 }
