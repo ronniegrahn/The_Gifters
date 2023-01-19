@@ -14,7 +14,7 @@ namespace The_Gifters.Views.Users
 		[EmailAddress]
 		public string Email { get; set; }
 
-		[Required(ErrorMessage = "Enter a PhoneNumber")]
+		[Required(ErrorMessage = "Enter a phone number")]
 		public string PhoneNumber { get; set; }
 
 		[Required(ErrorMessage = "Enter a password")]
