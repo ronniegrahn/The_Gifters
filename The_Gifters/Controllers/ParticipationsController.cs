@@ -79,5 +79,12 @@ namespace The_Gifters.Controllers
             return RedirectToAction("MyParticipations", "Participations");
 
         }
-    }
+
+		[HttpPost("participations/details/{id}")]
+		public async Task<IActionResult> DeleteParticipation(int id)
+		{
+			await participatesService.DeleteParticipation(id);
+			return RedirectToAction("MyParticipations", "Participations");
+		}
+	}
 }

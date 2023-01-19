@@ -159,7 +159,10 @@ namespace The_Gifters.Models
                 ParticipationSumGenerated = Math.Round(CalculateInterest(theParticipation.ParticipationDate, DateTime.Now, Convert.ToDouble(theParticipation.Amount), 0.05)),
                 OrganizationName = giftersContext.Organizations.First(x => x.Id == theParticipation.OrganizationId).OrganizationName,
                 OrganizationDescription = giftersContext.Organizations.First(x => x.Id == theParticipation.OrganizationId).Description,
-            };
+                ParticipationId = theParticipation.Id,
+				IsRefundable = theParticipation.IsRefundable,
+				IsActive = theParticipation.IsActive,
+			};
 
             return detailsVM;
         }
@@ -181,5 +184,20 @@ namespace The_Gifters.Models
             double interest = initialAmount * interestRate * years;
             return interest;
         }
+
     }
+
+
+		internal Task DeleteParticipation(int id)
+		{
+			var participation = giftersContext.Participations.First(x => x.Id == id);
+			participation.IsActive = false;
+            participation.IsRefundable = false;
+            
+			giftersContext.SaveChanges();
+
+			return Task.CompletedTask;
+		}
+	}
+
 }
