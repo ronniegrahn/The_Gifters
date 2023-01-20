@@ -21,7 +21,6 @@ body {
 }
 a {
     text-decoration: none;
-    /*font-family: 'Source Serif Pro';*/
     color: white;
     text-transform: uppercase;
     font-size: large;
@@ -34,10 +33,7 @@ a {
     }
 
 a:hover {
-    color: red; /* mouse over link */
-}
-a:active {
-    color: orange; /* active link */
+    color: dimgrey;
 }
 
 label {
@@ -150,7 +146,6 @@ img {
     font-size: 35px;
     margin-top: 3%;
     border-radius: 20px;
-
 }
 
 .my-participations-button, a:visited {
