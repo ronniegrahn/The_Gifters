@@ -12,14 +12,16 @@
 	<label class ="sign-in-and-register-label-egen" asp-for="Amount"></label>
 	<input class="create-input-egen" asp-for="Amount" />
 	<span asp-validation-for="Amount"></span>
-	<label class="sign-in-and-register-label-egen" asp-for="OrganizationNames"></label>
-	<select id="drpEmpList" class="form-control" 
+	<label class="sign-in-and-register-label-egen" asp-for="OrganizationNames">Organization</label>
+	<select class="create-input-egen" id="drpEmpList" class="form-control" 
 		asp-for="@Model.SelectedOrganizationName"
 		asp-items="@Model.OrganizationNames">
 	</select>
 	<span asp-validation-for="@Model.SelectedOrganizationName"></span>
 
 
+	<br />
+	<br />
 	<br />
 	<input class="button-egen" type="submit" name="refundable" value="Refundable (12 months)"/>
 	<input class="button-egen" type="submit" name="donation" value="Donate (no refund)" />
